@@ -1,59 +1,278 @@
-# Frontend
+# Sistema Souza Car - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12.
+Frontend do sistema de gerenciamento de oficina mecânica desenvolvido utilizando:
 
-## Development server
+- Angular
+- TypeScript
+- Bootstrap
+- Angular Router
+- Angular HttpClient
 
-To start a local development server, run:
+---
+
+# Pré-requisitos
+
+Antes de rodar o projeto, é necessário instalar os seguintes softwares na máquina.
+
+---
+
+# Node.js
+
+Versão obrigatória utilizada no projeto:
+
+```bash
+v24.15.0
+```
+
+---
+
+## Download Node.js
+
+https://nodejs.org/
+
+Durante a instalação:
+
+- Marque a opção:
+
+```txt
+Add to PATH
+```
+
+---
+
+## Verificar instalação
+
+Após instalar:
+
+```bash
+node -v
+```
+
+Deve retornar:
+
+```bash
+v24.15.0
+```
+
+---
+
+# NPM
+
+Versão utilizada no projeto:
+
+```bash
+11.12.1
+```
+
+---
+
+## Verificar instalação
+
+```bash
+npm -v
+```
+
+Deve retornar:
+
+```bash
+11.12.1
+```
+
+---
+
+# Angular CLI
+
+Versão utilizada:
+
+```bash
+Angular CLI 21.2.12
+```
+
+---
+
+## Instalar Angular CLI
+
+```bash
+npm install -g @angular/cli
+```
+
+---
+
+## Verificar instalação
+
+```bash
+ng version
+```
+
+---
+
+# VS Code 
+
+## Extensões recomendadas
+
+- Angular Language Service
+- TypeScript
+- Prettier
+
+---
+
+# Estrutura do Projeto
+
+```txt
+frontend/
+│
+├── src/
+│   ├── app/
+│   │
+│   ├── models/
+│   │   ├── cliente.ts
+│   │   ├── veiculo.ts
+│   │   └── ordem-servico.ts
+│   │
+│   ├── pages/
+│   │   ├── clientes/
+│   │   ├── veiculos/
+│   │   └── ordem-servico/
+│   │
+│   ├── services/
+│   │   ├── cliente.service.ts
+│   │   ├── veiculo.service.ts
+│   │   └── ordem-servico.service.ts
+│   │
+│   ├── app.routes.ts
+│   ├── app.config.ts
+│   └── app.component.ts
+│
+├── package.json
+├── angular.json
+└── README.md
+```
+
+---
+
+# ⚙️ Como Rodar o Projeto
+
+---
+
+# Clonar o repositório
+
+```bash
+git clone URL_DO_REPOSITORIO
+```
+
+---
+
+# Entrar na pasta frontend
+
+```bash
+cd frontend
+```
+
+---
+
+# Instalar dependências
+
+```bash
+npm install
+```
+
+---
+
+# Rodar o projeto
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+# Frontend funcionando
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Se tudo estiver correto:
 
 ```bash
-ng generate --help
+Application bundle generation complete.
 ```
 
-## Building
+---
 
-To build the project run:
+# Abrir no navegador
+
+```txt
+http://localhost:4200/
+```
+
+---
+
+# Comandos Úteis
+
+---
+
+## Gerar componente
+
+```bash
+ng generate component nome-componente
+```
+
+ou
+
+```bash
+ng g c nome-componente
+```
+
+---
+
+## Gerar service
+
+```bash
+ng generate service nome-service
+```
+
+---
+
+## Build do projeto
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Os arquivos compilados ficarão em:
 
-## Running unit tests
+```txt
+dist/
+```
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+---
+
+# Testes
+
+---
+
+## Rodar testes unitários
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Rodar testes end-to-end
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+# Comunicação com Backend
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+A comunicação com o backend FastAPI será feita utilizando:
+
+```txt
+HttpClient
+```
+
+
+Prática Profissional - Projeto de Software
+
+Universidade São Francisco
