@@ -1,0 +1,73 @@
+
+h1 {
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+
+.form-label {
+  color: #000000 !important;
+  font-weight: 600;
+  display: block;
+  transition: all 0.2s ease-in-out;
+  transform-origin: left center;
+}
+
+
+.form-control {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+}
+
+
+.mb-3:focus-within .form-label {
+  color: #1e3a8a !important; 
+  transform: translateY(-3px) scale(1.05);
+}
+
+.form-control:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 4px 8px rgba(30, 58, 138, 0.15);
+  outline: none;
+}
+
+
+table.table {
+  border-collapse: separate !important; 
+  border-spacing: 0;
+  border: 2px solid #0f172a !important; 
+  border-radius: 12px !important;       
+  overflow: hidden;                      
+}
+
+
+table thead tr th {
+  background-color: #1e3a8a !important; 
+  color: #ffffff !important;            
+  border-bottom: 2px solid #0f172a !important; 
+  border-right: 1px solid #0f172a !important;  
+  padding: 12px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+
+table thead tr th:last-child {
+  border-right: none !important;
+}
+
+
+table thead tr th:hover {
+  background-color: #3b82f6 !important; 
+  cursor: pointer;
+}
+
+
+table tbody tr td {
+  border-color: #cbd5e1 !important; 
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+}

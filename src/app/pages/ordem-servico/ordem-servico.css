@@ -1,0 +1,101 @@
+/* ==========================================================================
+   1. TÍTULO "ORDENS DE SERVIÇO" (TOM PRETO COM LINHA FINA ABAIXO)
+   ========================================================================== */
+h1, .container h1 {
+  color: #000000 !important; /* Tom preto absoluto */
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: inline-block; /* Garante que a linha acompanhe o tamanho do texto */
+  position: relative;
+  padding-bottom: 8px;
+}
+
+/* Criando a linha fina abaixo do nome */
+h1::after, .container h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;       /* Ocupa toda a extensão do título */
+  height: 2px;       /* Linha fina */
+  background-color: #0f172a; /* Tom escuro para combinar */
+}
+
+/* ==========================================================================
+   2. BLOCO E CAMPOS DO FORMULÁRIO "CRIAR ORDEM DE SERVIÇO"
+   ========================================================================== */
+/* Títulos dos campos (Labels) em preto */
+.form-label {
+  color: #000000 !important;
+  font-weight: 600;
+  display: block;
+  transition: all 0.2s ease-in-out; /* Transição para o efeito de saltar */
+  transform-origin: left center;
+}
+
+/* Caixa de preenchimento (Inputs) */
+.form-control {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+}
+
+/* EFEITO SALTAR: Quando a caixa de preenchimento (input) for selecionada (:focus) */
+/* O seletor :focus-within no bloco do grupo faz o label imediatamente acima saltar */
+.mb-3:focus-within .form-label {
+  color: #1e3a8a !important; /* Muda sutilmente para o azul do sistema ao focar */
+  transform: translateY(-3px) scale(1.05); /* Faz o título do campo saltar para cima e crescer */
+}
+
+.form-control:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+  outline: none;
+}
+
+/* ==========================================================================
+   3. TABELA "LISTA DE ORDENS" (SOMBRA AO REDOR, BORDAS AZUL ESCURO E REDONDAS)
+   ========================================================================== */
+/* Ajuste estrutural para que o Bootstrap aceite o arredondamento na tabela */
+table.table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border: 2px solid #0f172a !important; /* Borda externa em Azul Bem Escuro */
+  border-radius: 12px !important;       /* Cantos perfeitamente redondos */
+  overflow: hidden;
+  /* Sombra aplicada ao redor da tabela inteira conforme solicitado */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; 
+  margin-top: 15px;
+}
+
+/* Cabeçalhos (ID, Descrição, Status, Valor, Veículo ID) em fundo Azul Escuro e texto Branco */
+table thead tr th {
+  background-color: #1e3a8a !important; /* Fundo Azul Escuro */
+  color: #ffffff !important;            /* Escrito em Branco */
+  border-bottom: 2px solid #0f172a !important; /* Divisória inferior em azul escuro */
+  border-right: 1px solid #0f172a !important;  /* Divisórias verticais em azul escuro */
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+/* Remove o divisor vertical do último item para não quebrar o canto arredondado */
+table thead tr th:last-child {
+  border-right: none !important;
+}
+
+/* Efeito Hover: Ao passar o cursor em cima do cabeçalho, fica azul dois tons mais claro */
+table thead tr th:hover {
+  background-color: #3b82f6 !important; /* Azul dois tons mais claro */
+  cursor: pointer;
+}
+
+/* Estilização básica das linhas de dados para manter o padrão */
+table tbody tr td {
+  border-color: #cbd5e1 !important;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+}
