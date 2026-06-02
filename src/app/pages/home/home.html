@@ -1,107 +1,118 @@
-<div class="container mt-5">
+<div class="home-bg">
 
-  <!-- TÍTULO -->
-  <div class="text-center mb-5">
+  <div class="container py-5">
 
-    <h1 class="display-4 fw-bold">
-      Sistema Souza Car
-    </h1>
+    <!-- TÍTULO -->
+    <div class="text-center mb-5">
 
-    <p class="lead">
-      Sistema de gerenciamento de oficina mecânica
-    </p>
+    <img
+      src="souzacar.png"
+      alt="Sistema Souza Car"
+      class="logo-home"
+    >
 
   </div>
 
+    <!-- CARDS -->
+    <div class="row g-4">
 
-  <!-- CARDS -->
-  <div class="row g-4">
+      <!-- CLIENTES -->
+      <div class="col-md-4">
 
-    <!-- CLIENTES -->
-    <div class="col-md-4">
+        <div class="card shadow h-100">
 
-      <div class="card shadow h-100">
+          <div class="card-body text-center">
 
-        <div class="card-body text-center">
+              <img
+                src="clientes.png"
+                alt="Clientes"
+                class="card-icon"
+              >
 
-          <h2>👤</h2>
+            <h4 class="mt-3">
+              Clientes
+            </h4>
 
-          <h4 class="mt-3">
-            Clientes
-          </h4>
+            <p>
+              Gerencie os clientes da oficina.
+            </p>
 
-          <p>
-            Gerencie os clientes da oficina.
-          </p>
+            <a
+              routerLink="/clientes"
+              class="btn btn-primary"
+            >
+              Acessar
+            </a>
 
-          <a
-            routerLink="/clientes"
-            class="btn btn-primary"
-          >
-            Acessar
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- VEÍCULOS -->
-    <div class="col-md-4">
-
-      <div class="card shadow h-100">
-
-        <div class="card-body text-center">
-
-          <h2>🚗</h2>
-
-          <h4 class="mt-3">
-            Veículos
-          </h4>
-
-          <p>
-            Gerencie veículos cadastrados.
-          </p>
-
-          <a
-            routerLink="/veiculos"
-            class="btn btn-dark"
-          >
-            Acessar
-          </a>
+          </div>
 
         </div>
 
       </div>
 
-    </div>
+      <!-- VEÍCULOS -->
+      <div class="col-md-4">
 
+        <div class="card shadow h-100">
 
-    <!-- ORDENS -->
-    <div class="col-md-4">
+          <div class="card-body text-center">
 
-      <div class="card shadow h-100">
+              <img
+                src="veiculos.png"
+                alt="Veículos"
+                class="card-icon"
+              >
 
-        <div class="card-body text-center">
+            <h4 class="mt-3">
+              Veículos
+            </h4>
 
-          <h2>📋</h2>
+            <p>
+              Gerencie veículos cadastrados.
+            </p>
 
-          <h4 class="mt-3">
-            Ordens de Serviço
-          </h4>
+            <a
+              routerLink="/veiculos"
+              class="btn btn-dark"
+            >
+              Acessar
+            </a>
 
-          <p>
-            Controle das ordens de serviço.
-          </p>
+          </div>
 
-          <a
-            routerLink="/ordens-servico"
-            class="btn btn-success"
-          >
-            Acessar
-          </a>
+        </div>
+
+      </div>
+
+      <!-- ORDENS -->
+      <div class="col-md-4">
+
+        <div class="card shadow h-100">
+
+          <div class="card-body text-center">
+
+             <img
+                src="ordem-servico.png"
+                alt="Ordens de Serviço"
+                class="card-icon"
+              >
+
+            <h4 class="mt-3">
+              Ordens de Serviço
+            </h4>
+
+            <p>
+              Controle das ordens de serviço.
+            </p>
+
+            <a
+              routerLink="/ordens-servico"
+              class="btn btn-success"
+            >
+              Acessar
+            </a>
+
+          </div>
 
         </div>
 

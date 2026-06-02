@@ -1,14 +1,27 @@
 
-.container h1, 
+.home-bg {
+  min-height: calc(100vh - 76px);
+
+  background-image: url('/fundo-oficina.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+/* TÍTULO */
+
+.container h1,
 h1 {
-  color: #1e293b !important; 
+  color: #1e293b !important;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 5px;
-  
-  
-  text-shadow: 
+
+  text-shadow:
     0 1px 0 #cbd5e1,
     0 2px 0 #cbd5e1,
     0 3px 0 #94a3b8,
@@ -23,7 +36,6 @@ h1 {
     0 20px 20px rgba(0,0,0,.15);
 }
 
-
 .container p,
 h1 + p {
   font-size: 1.15rem;
@@ -33,7 +45,6 @@ h1 + p {
   position: relative;
 }
 
-
 .container p::after,
 h1 + p::after {
   content: "";
@@ -41,29 +52,55 @@ h1 + p::after {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;             
-  height: 4px;              
-  background: #1e3a8a;      
+  width: 180px;
+  height: 4px;
+  background: #1e3a8a;
   border-radius: 2px;
-  
-  box-shadow: 0 4px 8px rgba(30, 58, 138, 0.4); 
+
+  box-shadow: 0 4px 8px rgba(30, 58, 138, 0.4);
 }
 
-
+/* CARDS */
 
 .card {
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); 
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 15px;
   border: 1px solid rgba(0,0,0,0.08) !important;
-}
 
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.08);
+}
 
 .card:hover {
-  transform: scale(1.06); 
-  
-  
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.16); 
-  
-  border-color: #1e3a8a !important; 
+  transform: scale(1.05);
+
+  box-shadow:
+    0 20px 35px rgba(0,0,0,0.18);
+
+  border-color: #1e3a8a !important;
+
   cursor: pointer;
 }
+
+.logo-home {
+  width: 400px;
+  height: auto;
+}
+
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+

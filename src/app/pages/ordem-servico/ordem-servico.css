@@ -90,3 +90,21 @@ table tbody tr td {
   vertical-align: middle;
   padding: 10px;
 }
+
+
+.titulo-pagina {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    margin-bottom: 25px;
+}
+
+.icone-titulo {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}

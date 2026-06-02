@@ -7,12 +7,15 @@
       class="navbar-brand fw-bold"
       routerLink="/"
     >
-      Souza Car
+      <img
+        src="souzacarlogo.png"
+        alt="Souza Car"
+        height="50"
+      >
     </a>
 
     <div class="navbar-nav">
 
-      <!-- CLIENTES -->
       <a
         class="nav-link"
         routerLink="/clientes"
@@ -20,7 +23,6 @@
         Clientes
       </a>
 
-      <!-- VEÍCULOS -->
       <a
         class="nav-link"
         routerLink="/veiculos"
@@ -28,7 +30,6 @@
         Veículos
       </a>
 
-      <!-- ORDENS -->
       <a
         class="nav-link"
         routerLink="/ordens-servico"
@@ -42,9 +43,4 @@
 
 </nav>
 
-
-<div class="container mt-4">
-
-  <router-outlet></router-outlet>
-
-</div>
+<router-outlet></router-outlet>
