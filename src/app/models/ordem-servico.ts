@@ -1,8 +1,7 @@
 export interface OrdemServico {
-
   id?: number;
 
-  descricao: string;
+  descricao_problema: string;
 
   status: string;
 
