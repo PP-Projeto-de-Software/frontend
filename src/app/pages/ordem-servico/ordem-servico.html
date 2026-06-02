@@ -1,105 +1,46 @@
 <div class="container mt-5">
-
-  <h1 class="mb-4">
-    📋 Ordens de Serviço
-  </h1>
-
+  <h1 class="mb-4">📋 Ordens de Serviço</h1>
 
   <!-- FORMULÁRIO -->
   <div class="card shadow mb-5">
-
     <div class="card-body">
-
-      <h4 class="mb-4">
-        Criar Ordem de Serviço
-      </h4>
-
+      <h4 class="mb-4">Criar Ordem de Serviço</h4>
 
       <div class="mb-3">
+        <label class="form-label"> Descrição </label>
 
-        <label class="form-label">
-          Descrição
-        </label>
-
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novaOrdem.descricao"
-        >
-
+        <input type="text" class="form-control" [(ngModel)]="novaOrdem.descricao_problema" />
       </div>
-
 
       <div class="mb-3">
+        <label class="form-label"> Status </label>
 
-        <label class="form-label">
-          Status
-        </label>
-
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novaOrdem.status"
-        >
-
+        <input type="text" class="form-control" [(ngModel)]="novaOrdem.status" />
       </div>
-
 
       <div class="mb-3">
+        <label class="form-label"> Valor </label>
 
-        <label class="form-label">
-          Valor
-        </label>
-
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="novaOrdem.valor"
-        >
-
+        <input type="number" class="form-control" [(ngModel)]="novaOrdem.valor" />
       </div>
-
 
       <div class="mb-3">
+        <label class="form-label"> Veículo ID </label>
 
-        <label class="form-label">
-          Veículo ID
-        </label>
-
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="novaOrdem.veiculo_id"
-        >
-
+        <input type="number" class="form-control" [(ngModel)]="novaOrdem.veiculo_id" />
       </div>
 
-
-      <button
-        class="btn btn-success"
-        (click)="cadastrarOrdemServico()"
-      >
-        Criar Ordem
-      </button>
-
+      <button class="btn btn-success" (click)="cadastrarOrdemServico()">Criar Ordem</button>
     </div>
-
   </div>
-
 
   <!-- TABELA -->
   <div class="card shadow">
-
     <div class="card-body">
-
-      <h4 class="mb-4">
-        Lista de Ordens
-      </h4>
+      <h4 class="mb-4">Lista de Ordens</h4>
 
       <table class="table table-bordered table-striped">
-
         <thead class="table-dark">
-
           <tr>
             <th>ID</th>
             <th>Descrição</th>
@@ -107,31 +48,20 @@
             <th>Valor</th>
             <th>Veículo ID</th>
           </tr>
-
         </thead>
 
         <tbody>
-
-          @for(ordem of ordensServico; track ordem.id){
-
+          @for (ordem of ordensServico; track ordem.id) {
             <tr>
-
               <td>{{ ordem.id }}</td>
-              <td>{{ ordem.descricao }}</td>
+              <td>{{ ordem.descricao_problema }}</td>
               <td>{{ ordem.status }}</td>
               <td>R$ {{ ordem.valor }}</td>
               <td>{{ ordem.veiculo_id }}</td>
-
             </tr>
-
           }
-
         </tbody>
-
       </table>
-
     </div>
-
   </div>
-
 </div>
