@@ -6,38 +6,24 @@ import { Observable } from 'rxjs';
 
 import { Veiculo } from '../models/veiculo';
 
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VeiculoService {
-
   // URL backend FastAPI
-  private apiUrl = 'http://127.0.0.1:8000/veiculos';
+  private apiUrl = `${environment.apiUrl}/veiculos`;
 
-
-  constructor(
-    private http: HttpClient
-  ) {}
-
+  constructor(private http: HttpClient) {}
 
   // LISTAR VEÍCULOS
   listarVeiculos(): Observable<Veiculo[]> {
-
-    return this.http.get<Veiculo[]>(
-      this.apiUrl
-    );
+    return this.http.get<Veiculo[]>(this.apiUrl);
   }
 
-
- // CRIAR VEÍCULO
-  criarVeiculo(
-    veiculo: Veiculo
-  ): Observable<Veiculo> {
-
-    return this.http.post<Veiculo>(
-      this.apiUrl,
-      veiculo
-    );
+  // CRIAR VEÍCULO
+  criarVeiculo(veiculo: Veiculo): Observable<Veiculo> {
+    return this.http.post<Veiculo>(this.apiUrl, veiculo);
   }
 }
