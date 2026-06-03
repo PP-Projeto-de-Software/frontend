@@ -1,81 +1,243 @@
 <div class="container mt-5">
 
-
   <h1 class="titulo-pagina mb-4">
 
-  <img
-    src="ordem-servico.png"
-    alt="Ordens de Serviço"
-    class="icone-titulo"
-  >
+    <img
+      src="ordem-servico.png"
+      alt="Ordens de Serviço"
+      class="icone-titulo"
+    >
 
-  Ordens de Serviço
+    Ordens de Serviço
 
-</h1>
-
-
+  </h1>
 
   <!-- FORMULÁRIO -->
-  <div class="card shadow mb-5">
+  <div class="card shadow mb-4">
+
     <div class="card-body">
-      <h4 class="mb-4">Criar Ordem de Serviço</h4>
 
+      <h4 class="mb-4">
+
+        Criar Ordem de Serviço
+
+      </h4>
+
+      <!-- CLIENTE -->
       <div class="mb-3">
-        <label class="form-label"> Descrição </label>
 
-        <input type="text" class="form-control" [(ngModel)]="novaOrdem.descricao_problema" />
+        <label class="form-label">
+          Cliente
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="clienteSelecionado"
+          (change)="onClienteChange()">
+
+          <option [ngValue]="0">
+            Selecione um cliente
+          </option>
+
+          @for (cliente of clientes; track cliente.id) {
+
+            <option [ngValue]="cliente.id">
+
+              {{ cliente.nome }}
+
+            </option>
+
+          }
+
+        </select>
+
       </div>
 
+      <!-- VEÍCULO -->
       <div class="mb-3">
-        <label class="form-label"> Status </label>
 
-        <input type="text" class="form-control" [(ngModel)]="novaOrdem.status" />
+        <label class="form-label">
+          Veículo
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="novaOrdem.veiculo_id">
+
+          <option [ngValue]="0">
+            Selecione um veículo
+          </option>
+
+          @for (veiculo of veiculosCliente; track veiculo.id) {
+
+            <option [ngValue]="veiculo.id">
+
+              {{ veiculo.modelo }}
+              -
+              {{ veiculo.placa }}
+
+            </option>
+
+          }
+
+        </select>
+
       </div>
 
+      <!-- DESCRIÇÃO -->
       <div class="mb-3">
-        <label class="form-label"> Valor </label>
 
-        <input type="number" class="form-control" [(ngModel)]="novaOrdem.valor" />
+        <label class="form-label">
+
+          Descrição
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="novaOrdem.descricao_problema"
+        >
+
       </div>
 
+      <!-- VALOR -->
       <div class="mb-3">
-        <label class="form-label"> Veículo ID </label>
 
-        <input type="number" class="form-control" [(ngModel)]="novaOrdem.veiculo_id" />
+        <label class="form-label">
+
+          Valor
+
+        </label>
+
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="novaOrdem.valor_total"
+        >
+
       </div>
 
-      <button class="btn btn-success" (click)="cadastrarOrdemServico()">Criar Ordem</button>
+      <!-- STATUS -->
+      <div class="mb-4">
+
+        <label class="form-label">
+
+          Status
+
+        </label>
+
+        <select
+          class="form-select"
+          [(ngModel)]="novaOrdem.status">
+
+          <option value="Pendente">
+            Pendente
+          </option>
+
+          <option value="Em Andamento">
+            Em Andamento
+          </option>
+
+          <option value="Concluído">
+            Concluído
+          </option>
+
+        </select>
+
+      </div>
+
+      <button
+        class="btn btn-success"
+        (click)="cadastrarOrdemServico()">
+
+        Criar Ordem
+
+      </button>
+
     </div>
+
   </div>
 
+  <!-- BOTÃO -->
+  <button
+    class="btn btn-outline-dark mb-4"
+    (click)="toggleTabela()">
+
+    @if (!mostrarTabela) {
+
+      Ver Ordens
+
+    } @else {
+
+      Ocultar Ordens
+
+    }
+
+  </button>
+
   <!-- TABELA -->
+  @if (mostrarTabela) {
+
   <div class="card shadow">
+
     <div class="card-body">
-      <h4 class="mb-4">Lista de Ordens</h4>
+
+      <h4 class="mb-4">
+
+        Lista de Ordens
+
+      </h4>
 
       <table class="table table-bordered table-striped">
+
         <thead class="table-dark">
+
           <tr>
+
             <th>ID</th>
+            <th>Cliente</th>
+            <th>Veículo</th>
             <th>Descrição</th>
             <th>Status</th>
             <th>Valor</th>
-            <th>Veículo ID</th>
+
           </tr>
+
         </thead>
 
         <tbody>
+
           @for (ordem of ordensServico; track ordem.id) {
+
             <tr>
+
               <td>{{ ordem.id }}</td>
+
+              <td>{{ ordem.cliente_nome }}</td>
+
+              <td>{{ ordem.veiculo_modelo }}</td>
+
               <td>{{ ordem.descricao_problema }}</td>
+
               <td>{{ ordem.status }}</td>
-              <td>R$ {{ ordem.valor }}</td>
-              <td>{{ ordem.veiculo_id }}</td>
+
+              <td>
+                R$ {{ ordem.valor_total }}
+              </td>
+
             </tr>
+
           }
+
         </tbody>
+
       </table>
+
     </div>
+
   </div>
+
+  }
+
 </div>

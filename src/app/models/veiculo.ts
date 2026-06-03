@@ -11,4 +11,6 @@ export interface Veiculo {
   ano: number;
 
   cliente_id: number;
+
+  cliente_nome?: string;
 }

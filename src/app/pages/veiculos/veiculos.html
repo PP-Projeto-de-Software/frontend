@@ -2,18 +2,18 @@
 
   <h1 class="titulo-pagina mb-4">
 
-  <img
-    src="veiculos.png"
-    alt="Veículos"
-    class="icone-titulo"
-  >
+    <img
+      src="veiculos.png"
+      alt="Veículos"
+      class="icone-titulo"
+    >
 
-  Veículos
+    Veículos
 
-</h1>
+  </h1>
 
   <!-- FORMULÁRIO -->
-  <div class="card shadow mb-5">
+  <div class="card shadow mb-4">
 
     <div class="card-body">
 
@@ -21,22 +21,34 @@
         Cadastrar Veículo
       </h4>
 
-
+      <!-- CLIENTE -->
       <div class="mb-3">
 
         <label class="form-label">
-          Modelo
+          Cliente
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novoVeiculo.modelo"
-        >
+        <select
+          class="form-select"
+          [(ngModel)]="novoVeiculo.cliente_id">
+
+          <option [ngValue]="0">
+            Selecione um cliente
+          </option>
+
+          @for (cliente of clientes; track cliente.id) {
+
+            <option [ngValue]="cliente.id">
+              {{ cliente.nome }}
+            </option>
+
+          }
+
+        </select>
 
       </div>
 
-
+      <!-- MARCA -->
       <div class="mb-3">
 
         <label class="form-label">
@@ -51,7 +63,22 @@
 
       </div>
 
+      <!-- MODELO -->
+      <div class="mb-3">
 
+        <label class="form-label">
+          Modelo
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="novoVeiculo.modelo"
+        >
+
+      </div>
+
+      <!-- PLACA -->
       <div class="mb-3">
 
         <label class="form-label">
@@ -66,8 +93,8 @@
 
       </div>
 
-
-      <div class="mb-3">
+      <!-- ANO -->
+      <div class="mb-4">
 
         <label class="form-label">
           Ano
@@ -81,35 +108,38 @@
 
       </div>
 
-
-      <div class="mb-3">
-
-        <label class="form-label">
-          Cliente ID
-        </label>
-
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="novoVeiculo.cliente_id"
-        >
-
-      </div>
-
-
       <button
         class="btn btn-dark"
-        (click)="cadastrarVeiculo()"
-      >
-        Cadastrar
+        (click)="cadastrarVeiculo()">
+
+        Cadastrar Veículo
+
       </button>
 
     </div>
 
   </div>
 
+  <!-- BOTÃO LISTA -->
+  <button
+    class="btn btn-outline-dark mb-4"
+    (click)="toggleTabela()">
+
+    @if (!mostrarTabela) {
+
+      Ver Veículos
+
+    } @else {
+
+      Ocultar Veículos
+
+    }
+
+  </button>
 
   <!-- TABELA -->
+  @if (mostrarTabela) {
+
   <div class="card shadow">
 
     <div class="card-body">
@@ -123,28 +153,30 @@
         <thead class="table-dark">
 
           <tr>
+
             <th>ID</th>
-            <th>Modelo</th>
+            <th>Cliente</th>
             <th>Marca</th>
+            <th>Modelo</th>
             <th>Placa</th>
             <th>Ano</th>
-            <th>Cliente ID</th>
+
           </tr>
 
         </thead>
 
         <tbody>
 
-          @for(veiculo of veiculos; track veiculo.id){
+          @for (veiculo of veiculos; track veiculo.id) {
 
             <tr>
 
               <td>{{ veiculo.id }}</td>
-              <td>{{ veiculo.modelo }}</td>
+              <td>{{ veiculo.cliente_nome }}</td>
               <td>{{ veiculo.marca }}</td>
+              <td>{{ veiculo.modelo }}</td>
               <td>{{ veiculo.placa }}</td>
               <td>{{ veiculo.ano }}</td>
-              <td>{{ veiculo.cliente_id }}</td>
 
             </tr>
 
@@ -157,5 +189,7 @@
     </div>
 
   </div>
+
+  }
 
 </div>

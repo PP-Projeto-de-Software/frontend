@@ -1,74 +1,166 @@
 <div class="container mt-5">
 
+  <h1 class="titulo-pagina mb-4">
 
-      <h1 class="titulo-pagina mb-4">
+    <img
+      src="clientes.png"
+      alt="Clientes"
+      class="icone-titulo"
+    >
 
-      <img
-        src="clientes.png"
-        alt="Clientes"
-        class="icone-titulo"
+    Clientes
+
+  </h1>
+
+  <!-- FORMULÁRIO -->
+
+  <div class="card shadow mb-5">
+
+    <div class="card-body">
+
+      <h4 class="mb-4">
+
+        Cadastrar Cliente
+
+      </h4>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Nome
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="novoCliente.nome"
+          placeholder="Digite o nome do cliente"
+        />
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Telefone
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="novoCliente.telefone"
+          placeholder="(11) 99999-9999"
+        />
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+
+          Email
+
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          [(ngModel)]="novoCliente.email"
+          placeholder="cliente@email.com"
+        />
+
+      </div>
+
+      <button
+        class="btn btn-success"
+        (click)="cadastrarCliente()"
       >
+        Cadastrar Cliente
+      </button>
 
-      Clientes
-
-    </h1>
-
-
-
-  <div class="mb-4">
-    <div class="mb-3">
-      <label class="form-label">Nome</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="novoCliente.nome"
-        placeholder="Digite o nome do cliente"
-      />
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Telefone</label>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="novoCliente.telefone"
-        placeholder="(00) 00000-0000"
-      />
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        [(ngModel)]="novoCliente.email"
-        placeholder="exemplo@email.com"
-      />
-    </div>
-
-    <button class="btn btn-dark" (click)="cadastrarCliente()">Cadastrar</button>
   </div>
 
-  <hr class="my-4" />
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>Email</th>
-      </tr>
-    </thead>
+  <!-- BOTÃO LISTA -->
 
-    <tbody>
-      @for (cliente of clientes; track cliente.id) {
-        <tr>
-          <td>{{ cliente.id }}</td>
-          <td>{{ cliente.nome }}</td>
-          <td>{{ cliente.telefone }}</td>
-          <td>{{ cliente.email }}</td>
-        </tr>
+  <div class="mb-4">
+
+    <button
+      class="btn btn-outline-dark mb-4"
+      (click)="toggleTabela()"
+    >
+
+      @if(!mostrarTabela){
+
+        Ver Clientes Cadastrados
+
+      } @else {
+
+        Ocultar Clientes
+
       }
-    </tbody>
-  </table>
+
+    </button>
+
+  </div>
+
+  <!-- TABELA -->
+
+  @if(mostrarTabela){
+
+    <div class="card shadow">
+
+      <div class="card-body">
+
+        <h4 class="mb-4">
+
+          Lista de Clientes
+
+        </h4>
+
+        <table class="table table-bordered table-striped">
+
+          <thead class="table-dark">
+
+            <tr>
+
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Email</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            @for(cliente of clientes; track cliente.id){
+
+              <tr>
+
+                <td>{{ cliente.id }}</td>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.telefone }}</td>
+                <td>{{ cliente.email }}</td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  }
+
 </div>

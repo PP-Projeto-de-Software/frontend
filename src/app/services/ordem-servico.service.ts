@@ -12,18 +12,62 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class OrdemServicoService {
-  // URL backend FastAPI
-  private apiUrl = `${environment.apiUrl}/ordens-servico`;
 
-  constructor(private http: HttpClient) {}
+  private apiUrl =
+    `${environment.apiUrl}/ordens-servico`;
 
-  // LISTAR ORDENS DE SERVIÇO
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  // LISTAR
   listarOrdensServico(): Observable<OrdemServico[]> {
-    return this.http.get<OrdemServico[]>(this.apiUrl);
+
+    return this.http.get<OrdemServico[]>(
+      this.apiUrl
+    );
   }
 
-  // CRIAR ORDEM DE SERVIÇO
-  criarOrdemServico(ordem: OrdemServico): Observable<OrdemServico> {
-    return this.http.post<OrdemServico>(this.apiUrl, ordem);
+  // BUSCAR POR ID
+  buscarPorId(
+    id: number
+  ): Observable<OrdemServico> {
+
+    return this.http.get<OrdemServico>(
+      `${this.apiUrl}/${id}`
+    );
+  }
+
+  // CRIAR
+  criarOrdemServico(
+    ordem: OrdemServico
+  ): Observable<OrdemServico> {
+
+    return this.http.post<OrdemServico>(
+      this.apiUrl,
+      ordem
+    );
+  }
+
+  // EDITAR
+  atualizarOrdemServico(
+    id: number,
+    ordem: OrdemServico
+  ): Observable<OrdemServico> {
+
+    return this.http.put<OrdemServico>(
+      `${this.apiUrl}/${id}`,
+      ordem
+    );
+  }
+
+  // EXCLUIR
+  deletarOrdemServico(
+    id: number
+  ): Observable<void> {
+
+    return this.http.delete<void>(
+      `${this.apiUrl}/${id}`
+    );
   }
 }

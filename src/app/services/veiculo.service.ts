@@ -12,18 +12,59 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class VeiculoService {
-  // URL backend FastAPI
+
   private apiUrl = `${environment.apiUrl}/veiculos`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
-  // LISTAR VEÍCULOS
+  // LISTAR TODOS
   listarVeiculos(): Observable<Veiculo[]> {
+
     return this.http.get<Veiculo[]>(this.apiUrl);
   }
 
-  // CRIAR VEÍCULO
-  criarVeiculo(veiculo: Veiculo): Observable<Veiculo> {
-    return this.http.post<Veiculo>(this.apiUrl, veiculo);
+  // BUSCAR POR CLIENTE
+  listarPorCliente(
+    clienteId: number
+  ): Observable<Veiculo[]> {
+
+    return this.http.get<Veiculo[]>(
+      `${this.apiUrl}/cliente/${clienteId}`
+    );
+  }
+
+  // CRIAR
+  criarVeiculo(
+    veiculo: Veiculo
+  ): Observable<Veiculo> {
+
+    return this.http.post<Veiculo>(
+      this.apiUrl,
+      veiculo
+    );
+  }
+
+  // EDITAR
+  atualizarVeiculo(
+    id: number,
+    veiculo: Veiculo
+  ): Observable<Veiculo> {
+
+    return this.http.put<Veiculo>(
+      `${this.apiUrl}/${id}`,
+      veiculo
+    );
+  }
+
+  // EXCLUIR
+  deletarVeiculo(
+    id: number
+  ): Observable<void> {
+
+    return this.http.delete<void>(
+      `${this.apiUrl}/${id}`
+    );
   }
 }

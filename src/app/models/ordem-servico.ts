@@ -1,12 +1,16 @@
 export interface OrdemServico {
+
   id?: number;
 
   descricao_problema: string;
 
   status: string;
 
-  valor: number;
+  valor_total: number;
 
-  // ID do veículo relacionado
   veiculo_id: number;
+
+  cliente_nome?: string;
+
+  veiculo_modelo?: string;
 }

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
+import Swal from 'sweetalert2';
+
 import { ClienteService } from '../../services/cliente.service';
 
 import { Cliente } from '../../models/cliente';
-
 
 @Component({
   selector: 'app-clientes',
@@ -24,6 +25,7 @@ export class ClientesComponent implements OnInit {
 
   clientes: Cliente[] = [];
 
+  mostrarTabela = false;
 
   novoCliente: Cliente = {
 
@@ -32,17 +34,19 @@ export class ClientesComponent implements OnInit {
     email: ''
   };
 
-
   constructor(
     private clienteService: ClienteService
   ) {}
-
 
   ngOnInit(): void {
 
     this.carregarClientes();
   }
 
+  toggleTabela(): void {
+
+    this.mostrarTabela = !this.mostrarTabela;
+  }
 
   carregarClientes(): void {
 
@@ -62,7 +66,6 @@ export class ClientesComponent implements OnInit {
       });
   }
 
-
   cadastrarCliente(): void {
 
     this.clienteService
@@ -70,6 +73,17 @@ export class ClientesComponent implements OnInit {
       .subscribe({
 
         next: () => {
+
+          Swal.fire({
+
+            icon: 'success',
+
+            title: 'Sucesso',
+
+            text: 'Cliente cadastrado com sucesso!',
+
+            confirmButtonColor: '#3b82f6'
+          });
 
           this.carregarClientes();
 
@@ -83,7 +97,16 @@ export class ClientesComponent implements OnInit {
 
         error: (erro) => {
 
-          console.log(erro);
+          Swal.fire({
+
+            icon: 'error',
+
+            title: 'Erro',
+
+            text: erro.error?.detail || 'Erro ao cadastrar cliente.',
+
+            confirmButtonColor: '#1e3a8a'
+          });
         }
       });
   }
