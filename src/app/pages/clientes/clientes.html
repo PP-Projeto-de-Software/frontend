@@ -1,4 +1,5 @@
 <div class="container mt-5">
+<<<<<<< HEAD
 
       <h1 class="titulo-pagina mb-4">
 
@@ -11,58 +12,64 @@
       Clientes
 
     </h1>
+=======
+  <h1 class="mb-4">👤 Clientes</h1>
+>>>>>>> 211abb90e08449cc2275091aa581406cd2129d71
 
   <div class="mb-4">
     <div class="mb-3">
       <label class="form-label">Nome</label>
-      <input type="text" class="form-control" [(ngModel)]="novoCliente.nome" placeholder="Digite o nome do cliente">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="novoCliente.nome"
+        placeholder="Digite o nome do cliente"
+      />
     </div>
 
     <div class="mb-3">
       <label class="form-label">Telefone</label>
-      <input type="text" class="form-control" [(ngModel)]="novoCliente.telefone" placeholder="(00) 00000-0000">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="novoCliente.telefone"
+        placeholder="(00) 00000-0000"
+      />
     </div>
 
     <div class="mb-3">
       <label class="form-label">Email</label>
-      <input type="email" class="form-control" [(ngModel)]="novoCliente.email" placeholder="exemplo@email.com">
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="novoCliente.email"
+        placeholder="exemplo@email.com"
+      />
     </div>
 
-    <button class="btn btn-dark" (click)="cadastrarCliente()">
-      Cadastrar
-    </button>
+    <button class="btn btn-dark" (click)="cadastrarCliente()">Cadastrar</button>
   </div>
 
-  <hr class="my-4"> <table class="table table-bordered">
-
+  <hr class="my-4" />
+  <table class="table table-bordered">
     <thead>
-
       <tr>
         <th>ID</th>
         <th>Nome</th>
         <th>Telefone</th>
         <th>Email</th>
       </tr>
-
     </thead>
 
     <tbody>
-
-      @for(cliente of clientes; track cliente.id){
-
+      @for (cliente of clientes; track cliente.id) {
         <tr>
-
           <td>{{ cliente.id }}</td>
           <td>{{ cliente.nome }}</td>
           <td>{{ cliente.telefone }}</td>
           <td>{{ cliente.email }}</td>
-
         </tr>
-
       }
-
     </tbody>
-
   </table>
-
 </div>
