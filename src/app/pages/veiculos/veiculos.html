@@ -18,14 +18,26 @@
     <div class="card-body">
 
       <h4 class="mb-4">
-        Cadastrar Veículo
+
+        @if(!editando){
+
+          Cadastrar Veículo
+
+        } @else {
+
+          Editar Veículo
+
+        }
+
       </h4>
 
       <!-- CLIENTE -->
       <div class="mb-3">
 
         <label class="form-label">
+
           Cliente
+
         </label>
 
         <select
@@ -33,13 +45,17 @@
           [(ngModel)]="novoVeiculo.cliente_id">
 
           <option [ngValue]="0">
+
             Selecione um cliente
+
           </option>
 
-          @for (cliente of clientes; track cliente.id) {
+          @for(cliente of clientes; track cliente.id){
 
             <option [ngValue]="cliente.id">
+
               {{ cliente.nome }}
+
             </option>
 
           }
@@ -48,11 +64,50 @@
 
       </div>
 
+      <!-- CARD CLIENTE -->
+      @if(novoVeiculo.cliente_id){
+
+      <div class="card bg-light border mb-3">
+
+        <div class="card-body">
+
+          <h6 class="mb-2">
+
+            Dados do Cliente
+
+          </h6>
+
+          <strong>Nome:</strong>
+
+          {{
+            clientes.find(
+              c => c.id === novoVeiculo.cliente_id
+            )?.nome
+          }}
+
+          <br>
+
+          <strong>Telefone:</strong>
+
+          {{
+            clientes.find(
+              c => c.id === novoVeiculo.cliente_id
+            )?.telefone
+          }}
+
+        </div>
+
+      </div>
+
+      }
+
       <!-- MARCA -->
       <div class="mb-3">
 
         <label class="form-label">
+
           Marca
+
         </label>
 
         <input
@@ -67,7 +122,9 @@
       <div class="mb-3">
 
         <label class="form-label">
+
           Modelo
+
         </label>
 
         <input
@@ -82,13 +139,18 @@
       <div class="mb-3">
 
         <label class="form-label">
-          Placa
+
+          Placa (Ex: ABC1D23)
+
         </label>
 
         <input
           type="text"
           class="form-control"
           [(ngModel)]="novoVeiculo.placa"
+          maxlength="7"
+          placeholder="ABC1D23"
+          style="text-transform: uppercase;"
         >
 
       </div>
@@ -97,7 +159,9 @@
       <div class="mb-4">
 
         <label class="form-label">
+
           Ano
+
         </label>
 
         <input
@@ -108,13 +172,40 @@
 
       </div>
 
+      <!-- BOTÕES -->
+      @if(!editando){
+
       <button
+<<<<<<< HEAD
         class="btn btn-cadastrar"
+=======
+        class="btn btn-success"
+>>>>>>> d870040a59dd63f80c07fad6992ff920f56cca3d
         (click)="cadastrarVeiculo()">
 
         Cadastrar Veículo
 
       </button>
+
+      } @else {
+
+      <button
+        class="btn btn-warning me-2"
+        (click)="atualizarVeiculo()">
+
+        Salvar Alterações
+
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        (click)="limparFormulario()">
+
+        Cancelar
+
+      </button>
+
+      }
 
     </div>
 
@@ -145,7 +236,9 @@
     <div class="card-body">
 
       <h4 class="mb-4">
+
         Lista de Veículos
+
       </h4>
 
       <table class="table table-bordered table-striped">
@@ -160,6 +253,7 @@
             <th>Modelo</th>
             <th>Placa</th>
             <th>Ano</th>
+            <th>Ações</th>
 
           </tr>
 
@@ -169,16 +263,45 @@
 
           @for (veiculo of veiculos; track veiculo.id) {
 
-            <tr>
+          <tr>
 
-              <td>{{ veiculo.id }}</td>
-              <td>{{ veiculo.cliente_nome }}</td>
-              <td>{{ veiculo.marca }}</td>
-              <td>{{ veiculo.modelo }}</td>
-              <td>{{ veiculo.placa }}</td>
-              <td>{{ veiculo.ano }}</td>
+            <td>{{ veiculo.id }}</td>
 
-            </tr>
+            <td>
+
+              {{ veiculo.cliente_nome }}
+
+            </td>
+
+            <td>{{ veiculo.marca }}</td>
+
+            <td>{{ veiculo.modelo }}</td>
+
+            <td>{{ veiculo.placa }}</td>
+
+            <td>{{ veiculo.ano }}</td>
+
+            <td>
+
+              <button
+                class="btn btn-warning btn-sm me-2"
+                (click)="editarVeiculo(veiculo)">
+
+                Editar
+
+              </button>
+
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="excluirVeiculo(veiculo.id!)">
+
+                Excluir
+
+              </button>
+
+            </td>
+
+          </tr>
 
           }
 

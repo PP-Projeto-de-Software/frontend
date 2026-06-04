@@ -2,11 +2,7 @@
 
   <h1 class="titulo-pagina mb-4">
 
-    <img
-      src="clientes.png"
-      alt="Clientes"
-      class="icone-titulo"
-    >
+    <img src="clientes.png" alt="Clientes" class="icone-titulo">
 
     Clientes
 
@@ -28,16 +24,12 @@
 
         <label class="form-label">
 
-          Nome
+          Nome Completo
 
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novoCliente.nome"
-          placeholder="Digite o nome do cliente"
-        />
+        <input type="text" class="form-control" [(ngModel)]="novoCliente.nome"
+          placeholder="Digite o nome completo do cliente" />
 
       </div>
 
@@ -49,12 +41,7 @@
 
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novoCliente.telefone"
-          placeholder="(11) 99999-9999"
-        />
+        <input type="text" class="form-control" [(ngModel)]="novoCliente.telefone" placeholder="(11) 99999-9999" />
 
       </div>
 
@@ -66,19 +53,18 @@
 
         </label>
 
-        <input
-          type="email"
-          class="form-control"
-          [(ngModel)]="novoCliente.email"
-          placeholder="cliente@email.com"
-        />
+        <input type="email" class="form-control" [(ngModel)]="novoCliente.email" placeholder="cliente@email.com" />
 
       </div>
 
+<<<<<<< HEAD
       <button
         class="btn btn-cadastrar"
         (click)="cadastrarCliente()"
       >
+=======
+      <button class="btn btn-success" (click)="cadastrarCliente()">
+>>>>>>> d870040a59dd63f80c07fad6992ff920f56cca3d
         Cadastrar Cliente
       </button>
 
@@ -90,18 +76,15 @@
 
   <div class="mb-4">
 
-    <button
-      class="btn btn-outline-dark mb-4"
-      (click)="toggleTabela()"
-    >
+    <button class="btn btn-outline-dark mb-4" (click)="toggleTabela()">
 
       @if(!mostrarTabela){
 
-        Ver Clientes Cadastrados
+      Ver Clientes Cadastrados
 
       } @else {
 
-        Ocultar Clientes
+      Ocultar Clientes
 
       }
 
@@ -113,54 +96,73 @@
 
   @if(mostrarTabela){
 
-    <div class="card shadow">
+  <div class="card shadow">
 
-      <div class="card-body">
+    <div class="card-body">
 
-        <h4 class="mb-4">
+      <h4 class="mb-4">
 
-          Lista de Clientes
+        Lista de Clientes
 
-        </h4>
+      </h4>
 
-        <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped">
 
+<<<<<<< HEAD
           <thead class="cabecalho-tabela">
+=======
+        <thead class="table-dark">
+>>>>>>> d870040a59dd63f80c07fad6992ff920f56cca3d
 
-            <tr>
+          <tr>
 
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Telefone</th>
-              <th>Email</th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th width="180">Ações</th>
 
-            </tr>
+          </tr>
 
-          </thead>
+        </thead>
 
-          <tbody>
+        <tbody>
 
-            @for(cliente of clientes; track cliente.id){
+          @for(cliente of clientes; track cliente.id){
 
-              <tr>
+          <tr>
 
-                <td>{{ cliente.id }}</td>
-                <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.telefone }}</td>
-                <td>{{ cliente.email }}</td>
+            <td>{{ cliente.id }}</td>
 
-              </tr>
+            <td>{{ cliente.nome }}</td>
 
-            }
+            <td>{{ cliente.telefone }}</td>
 
-          </tbody>
+            <td>{{ cliente.email }}</td>
 
-        </table>
+            <td>
 
-      </div>
+              <button class="btn btn-warning btn-sm me-2" (click)="editarCliente(cliente)">
+                Editar
+              </button>
+
+              <button class="btn btn-danger btn-sm" (click)="excluirCliente(cliente.id!)">
+                Excluir
+              </button>
+
+            </td>
+
+          </tr>
+
+          }
+
+        </tbody>
+
+      </table>
 
     </div>
 
-  }
+  </div>
 
+  }
 </div>

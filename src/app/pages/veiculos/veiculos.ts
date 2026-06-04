@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
 
 import Swal from 'sweetalert2';
@@ -31,16 +30,15 @@ export class VeiculosComponent implements OnInit {
 
   mostrarTabela = false;
 
+  editando = false;
+
+  veiculoEditandoId?: number;
+
   novoVeiculo: Veiculo = {
-
     modelo: '',
-
     marca: '',
-
     placa: '',
-
     ano: 0,
-
     cliente_id: 0
   };
 
@@ -97,7 +95,43 @@ export class VeiculosComponent implements OnInit {
       });
   }
 
+  limparFormulario(): void {
+
+    this.novoVeiculo = {
+
+      modelo: '',
+
+      marca: '',
+
+      placa: '',
+
+      ano: 0,
+
+      cliente_id: 0
+    };
+
+    this.editando = false;
+
+    this.veiculoEditandoId = undefined;
+  }
+
   cadastrarVeiculo(): void {
+
+    this.novoVeiculo.placa =
+      this.novoVeiculo.placa
+        .trim()
+        .toUpperCase();
+
+    if (!this.novoVeiculo.cliente_id) {
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Cliente obrigatório',
+        text: 'Selecione um cliente.'
+      });
+
+      return;
+    }
 
     this.veiculoService
       .criarVeiculo(this.novoVeiculo)
@@ -118,18 +152,81 @@ export class VeiculosComponent implements OnInit {
 
           this.carregarVeiculos();
 
-          this.novoVeiculo = {
+          this.limparFormulario();
+        },
 
-            modelo: '',
+        error: (erro) => {
 
-            marca: '',
+          if (
+            erro.status === 400 &&
+            erro.error?.detail?.includes('placa')
+          ) {
 
-            placa: '',
+            Swal.fire({
+              icon: 'warning',
+              title: 'Placa já cadastrada',
+              text: erro.error.detail
+            });
 
-            ano: 0,
+            return;
+          }
 
-            cliente_id: 0
-          };
+          Swal.fire({
+
+            icon: 'error',
+
+            title: 'Erro',
+
+            text: erro.error?.detail || 'Erro ao cadastrar veículo.'
+          });
+        }
+      });
+  }
+
+  editarVeiculo(veiculo: Veiculo): void {
+
+    this.editando = true;
+
+    this.veiculoEditandoId = veiculo.id;
+
+    this.novoVeiculo = {
+
+      ...veiculo
+    };
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  atualizarVeiculo(): void {
+
+    if (!this.veiculoEditandoId) {
+      return;
+    }
+
+    this.veiculoService
+      .atualizarVeiculo(
+        this.veiculoEditandoId,
+        this.novoVeiculo
+      )
+      .subscribe({
+
+        next: () => {
+
+          Swal.fire({
+
+            icon: 'success',
+
+            title: 'Atualizado',
+
+            text: 'Veículo atualizado com sucesso!'
+          });
+
+          this.carregarVeiculos();
+
+          this.limparFormulario();
         },
 
         error: (erro) => {
@@ -140,11 +237,64 @@ export class VeiculosComponent implements OnInit {
 
             title: 'Erro',
 
-            text: erro.error?.detail || 'Erro ao cadastrar veículo.',
-
-            confirmButtonColor: '#1e3a8a'
+            text: erro.error?.detail || 'Erro ao atualizar.'
           });
         }
       });
+  }
+
+  excluirVeiculo(id: number): void {
+
+    Swal.fire({
+
+      title: 'Excluir veículo?',
+
+      text: 'Essa ação não poderá ser desfeita.',
+
+      icon: 'warning',
+
+      showCancelButton: true,
+
+      confirmButtonText: 'Sim',
+
+      cancelButtonText: 'Cancelar'
+    })
+    .then((resultado) => {
+
+      if (!resultado.isConfirmed) {
+        return;
+      }
+
+      this.veiculoService
+        .deletarVeiculo(id)
+        .subscribe({
+
+          next: () => {
+
+            Swal.fire({
+
+              icon: 'success',
+
+              title: 'Excluído',
+
+              text: 'Veículo removido com sucesso.'
+            });
+
+            this.carregarVeiculos();
+          },
+
+          error: () => {
+
+            Swal.fire({
+
+              icon: 'error',
+
+              title: 'Erro',
+
+              text: 'Não foi possível excluir.'
+            });
+          }
+        });
+    });
   }
 }

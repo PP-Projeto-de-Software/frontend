@@ -27,6 +27,10 @@ export class ClientesComponent implements OnInit {
 
   mostrarTabela = false;
 
+  modoEdicao = false;
+
+  clienteEditandoId: number | null = null;
+
   novoCliente: Cliente = {
 
     nome: '',
@@ -68,6 +72,51 @@ export class ClientesComponent implements OnInit {
 
   cadastrarCliente(): void {
 
+    if (this.modoEdicao && this.clienteEditandoId) {
+
+      this.clienteService
+        .atualizarCliente(
+          this.clienteEditandoId,
+          this.novoCliente
+        )
+        .subscribe({
+
+          next: () => {
+
+            Swal.fire({
+
+              icon: 'success',
+
+              title: 'Atualizado',
+
+              text: 'Cliente atualizado com sucesso!',
+
+              confirmButtonColor: '#3b82f6'
+            });
+
+            this.carregarClientes();
+
+            this.cancelarEdicao();
+          },
+
+          error: (erro) => {
+
+            Swal.fire({
+
+              icon: 'error',
+
+              title: 'Erro',
+
+              text:
+                erro.error?.detail ||
+                'Erro ao atualizar cliente.'
+            });
+          }
+        });
+
+      return;
+    }
+
     this.clienteService
       .criarCliente(this.novoCliente)
       .subscribe({
@@ -103,11 +152,105 @@ export class ClientesComponent implements OnInit {
 
             title: 'Erro',
 
-            text: erro.error?.detail || 'Erro ao cadastrar cliente.',
+            text:
+              erro.error?.detail ||
+              'Erro ao cadastrar cliente.',
 
             confirmButtonColor: '#1e3a8a'
           });
         }
       });
+  }
+
+  editarCliente(cliente: Cliente): void {
+
+    this.modoEdicao = true;
+
+    this.clienteEditandoId = cliente.id!;
+
+    this.novoCliente = {
+
+      nome: cliente.nome,
+      telefone: cliente.telefone,
+      email: cliente.email
+    };
+
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: 'smooth'
+    });
+  }
+
+  cancelarEdicao(): void {
+
+    this.modoEdicao = false;
+
+    this.clienteEditandoId = null;
+
+    this.novoCliente = {
+
+      nome: '',
+      telefone: '',
+      email: ''
+    };
+  }
+
+  excluirCliente(id: number): void {
+
+    Swal.fire({
+
+      title: 'Deseja excluir?',
+
+      text: 'Essa ação não poderá ser desfeita.',
+
+      icon: 'warning',
+
+      showCancelButton: true,
+
+      confirmButtonText: 'Sim',
+
+      cancelButtonText: 'Cancelar',
+
+      confirmButtonColor: '#dc3545'
+    }).then((result) => {
+
+      if (!result.isConfirmed) {
+
+        return;
+      }
+
+      this.clienteService
+        .deletarCliente(id)
+        .subscribe({
+
+          next: () => {
+
+            Swal.fire({
+
+              icon: 'success',
+
+              title: 'Excluído',
+
+              text: 'Cliente removido com sucesso!'
+            });
+
+            this.carregarClientes();
+          },
+
+          error: () => {
+
+            Swal.fire({
+
+              icon: 'error',
+
+              title: 'Erro',
+
+              text: 'Não foi possível excluir.'
+            });
+          }
+        });
+    });
   }
 }

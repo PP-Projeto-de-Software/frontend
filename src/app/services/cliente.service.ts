@@ -15,7 +15,7 @@ export class ClienteService {
   // URL backend FastAPI
   private apiUrl = `${environment.apiUrl}/clientes`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // LISTAR CLIENTES
   listarClientes(): Observable<Cliente[]> {
@@ -25,5 +25,27 @@ export class ClienteService {
   // CRIAR CLIENTES
   criarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.apiUrl, cliente);
+  }
+
+  // ATUALIZAR CLIENTE
+  atualizarCliente(
+    id: number,
+    cliente: Cliente
+  ): Observable<Cliente> {
+
+    return this.http.put<Cliente>(
+      `${this.apiUrl}/${id}`,
+      cliente
+    );
+  }
+  
+  // DELETAR CLIENTE
+  deletarCliente(
+    id: number
+  ): Observable<void> {
+
+    return this.http.delete<void>(
+      `${this.apiUrl}/${id}`
+    );
   }
 }
