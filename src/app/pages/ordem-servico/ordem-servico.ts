@@ -39,8 +39,7 @@ export class OrdemServicoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.carregarOrdensServico();
-    this.carregarClientes();
+    this.carregarClientes(); // só carrega clientes na inicialização
   }
 
   private ordemVazia(): OrdemServico {
@@ -68,6 +67,11 @@ export class OrdemServicoComponent implements OnInit {
 
   toggleTabela(): void {
     this.mostrarTabela = !this.mostrarTabela;
+
+    // só carrega quando abre a tabela
+    if (this.mostrarTabela) {
+      this.carregarOrdensServico();
+    }
   }
 
   carregarClientes(): void {
@@ -127,7 +131,10 @@ export class OrdemServicoComponent implements OnInit {
           text: 'Ordem cadastrada com sucesso!',
           confirmButtonColor: '#3b82f6'
         });
-        this.carregarOrdensServico();
+        // recarrega a tabela se estiver aberta
+        if (this.mostrarTabela) {
+          this.carregarOrdensServico();
+        }
         this.limparFormulario();
       },
       error: (erro) => {
@@ -183,7 +190,9 @@ export class OrdemServicoComponent implements OnInit {
             text: 'Ordem atualizada com sucesso!',
             confirmButtonColor: '#3b82f6'
           });
-          this.carregarOrdensServico();
+          if (this.mostrarTabela) {
+            this.carregarOrdensServico();
+          }
           this.limparFormulario();
         },
         error: (erro) => {
