@@ -8,6 +8,7 @@ import { VeiculosComponent } from './pages/veiculos/veiculos';
 
 import { OrdemServicoComponent } from './pages/ordem-servico/ordem-servico';
 
+import { DashboardComponent } from './pages/dashboard/dashboard';
 
 export const routes: Routes = [
 
@@ -29,5 +30,11 @@ export const routes: Routes = [
   {
     path: 'ordens-servico',
     component: OrdemServicoComponent
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./pages/dashboard/dashboard')
+        .then(m => m.DashboardComponent)
   }
 ];

@@ -18,7 +18,7 @@ export class OrdemServicoService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   // LISTAR
   listarOrdensServico(): Observable<OrdemServico[]> {
@@ -68,6 +68,13 @@ export class OrdemServicoService {
 
     return this.http.delete<void>(
       `${this.apiUrl}/${id}`
+    );
+  }
+
+  obterDashboard(): Observable<any> {
+
+    return this.http.get<any>(
+      `${this.apiUrl}/dashboard`
     );
   }
 }

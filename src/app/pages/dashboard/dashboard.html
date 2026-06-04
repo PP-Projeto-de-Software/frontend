@@ -1,16 +1,113 @@
-DASHBOARD
-<div class="col-md-4">
-  <div class="card shadow h-100">
-    <div class="card-body text-center">
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">total de faturamento: R$ Aqui</div>
+<div class="container mt-5">
+
+  <h1 class="titulo-dashboard mb-4">
+
+    Dashboard
+
+  </h1>
+
+  <div class="row">
+
+    <div class="col-md-3 mb-3">
+
+      <div class="card shadow">
+
+        <div class="card-body text-center">
+
+          <h5>Total de Ordens</h5>
+
+          <h2>
+
+            {{ dashboard.total_ordens }}
+
+          </h2>
+
         </div>
+
       </div>
 
-      <h1 class="mt-3">Faturamento</h1>
-
-      <p>Filtrar por data.</p>
     </div>
+
+    <div class="col-md-3 mb-3">
+
+      <div class="card shadow">
+
+        <div class="card-body text-center">
+
+          <h5>Pendentes</h5>
+
+          <h2>
+
+            {{ dashboard.pendentes }}
+
+          </h2>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+      <div class="card shadow">
+
+        <div class="card-body text-center">
+
+          <h5>Em Andamento</h5>
+
+          <h2>
+
+            {{ dashboard.em_andamento }}
+
+          </h2>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+      <div class="card shadow">
+
+        <div class="card-body text-center">
+
+          <h5>Concluídas</h5>
+
+          <h2>
+
+            {{ dashboard.concluidas }}
+
+          </h2>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
+  <div class="card shadow mt-4">
+
+    <div class="card-body text-center">
+
+      <h4>
+
+        Faturamento Total
+
+      </h4>
+
+      <h1>
+
+        R$ {{ dashboard.faturamento_total }}
+
+      </h1>
+
+    </div>
+
+  </div>
+
 </div>

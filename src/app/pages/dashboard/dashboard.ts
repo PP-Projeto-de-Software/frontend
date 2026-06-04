@@ -1,90 +1,43 @@
-// import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-// import { FormsModule } from '@angular/forms';
+import { OrdemServicoService }
+from '../../services/ordem-servico.service';
 
-// import Swal from 'sweetalert2';
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css'
+})
+export class DashboardComponent
+implements OnInit {
 
-// import { ClienteService } from '../../services/cliente.service';
+  dashboard: any = {};
 
-// import { Cliente } from '../../models/cliente';
+  constructor(
+    private ordemService: OrdemServicoService
+  ) {}
 
-// @Component({
-//   selector: 'app-clientes',
+  ngOnInit(): void {
 
-//   standalone: true,
+    this.carregarDashboard();
+  }
 
-//   imports: [FormsModule],
+  carregarDashboard(): void {
 
-//   templateUrl: './dashboard.html',
+    this.ordemService
+      .obterDashboard()
+      .subscribe({
 
-//   styleUrl: './dashboard.css',
-// })
-// export class ClientesComponent implements OnInit {
-//   clientes: Cliente[] = [];
+        next: (dados) => {
 
-//   mostrarTabela = false;
+          this.dashboard = dados;
+        },
 
-//   novoCliente: Cliente = {
-//     nome: '',
-//     telefone: '',
-//     email: '',
-//   };
+        error: (erro) => {
 
-//   constructor(private clienteService: ClienteService) {}
-
-//   ngOnInit(): void {
-//     this.carregarClientes();
-//   }
-
-//   toggleTabela(): void {
-//     this.mostrarTabela = !this.mostrarTabela;
-//   }
-
-//   carregarClientes(): void {
-//     this.clienteService.listarClientes().subscribe({
-//       next: (dados) => {
-//         this.clientes = dados;
-//       },
-
-//       error: (erro) => {
-//         console.log(erro);
-//       },
-//     });
-//   }
-
-//   cadastrarCliente(): void {
-//     this.clienteService.criarCliente(this.novoCliente).subscribe({
-//       next: () => {
-//         Swal.fire({
-//           icon: 'success',
-
-//           title: 'Sucesso',
-
-//           text: 'Cliente cadastrado com sucesso!',
-
-//           confirmButtonColor: '#3b82f6',
-//         });
-
-//         this.carregarClientes();
-
-//         this.novoCliente = {
-//           nome: '',
-//           telefone: '',
-//           email: '',
-//         };
-//       },
-
-//       error: (erro) => {
-//         Swal.fire({
-//           icon: 'error',
-
-//           title: 'Erro',
-
-//           text: erro.error?.detail || 'Erro ao cadastrar cliente.',
-
-//           confirmButtonColor: '#1e3a8a',
-//         });
-//       },
-//     });
-//   }
-// }
+          console.log(erro);
+        }
+      });
+  }
+}
