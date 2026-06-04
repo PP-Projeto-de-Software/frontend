@@ -2,11 +2,7 @@
 
   <h1 class="titulo-pagina mb-4">
 
-    <img
-      src="ordem-servico.png"
-      alt="Ordens de Serviço"
-      class="icone-titulo"
-    >
+    <img src="ordem-servico.png" alt="Ordens de Serviço" class="icone-titulo">
 
     Ordens de Serviço
 
@@ -21,11 +17,11 @@
 
         @if(!modoEdicao){
 
-          Criar Ordem de Serviço
+        Criar Ordem de Serviço
 
         } @else {
 
-          Editar Ordem de Serviço
+        Editar Ordem de Serviço
 
         }
 
@@ -38,10 +34,7 @@
           Cliente
         </label>
 
-        <select
-          class="form-select"
-          [(ngModel)]="clienteSelecionado"
-          (change)="onClienteChange()">
+        <select class="form-select" [(ngModel)]="clienteSelecionado" (change)="onClienteChange()">
 
           <option [ngValue]="0">
             Selecione um cliente
@@ -49,11 +42,11 @@
 
           @for (cliente of clientes; track cliente.id) {
 
-            <option [ngValue]="cliente.id">
+          <option [ngValue]="cliente.id">
 
-              {{ cliente.nome }} - {{ cliente.telefone }}
+            {{ cliente.nome }}
 
-            </option>
+          </option>
 
           }
 
@@ -63,29 +56,29 @@
 
       @if(clienteSelecionado){
 
-        <div class="card bg-light border mb-3">
+      <div class="card bg-light border mb-3">
 
-          <div class="card-body">
+        <div class="card-body">
 
-            <h6 class="mb-2">
+          <h6 class="mb-2">
 
-              Dados do Cliente
+            Dados do Cliente
 
-            </h6>
+          </h6>
 
-            <strong>Nome:</strong>
+          <strong>Nome:</strong>
 
-            {{ clientes.find(c => c.id === clienteSelecionado)?.nome }}
+          {{ clientes.find(c => c.id === clienteSelecionado)?.nome }}
 
-            <br>
+          <br>
 
-            <strong>Telefone:</strong>
+          <strong>Telefone:</strong>
 
-            {{ clientes.find(c => c.id === clienteSelecionado)?.telefone }}
-
-          </div>
+          {{ clientes.find(c => c.id === clienteSelecionado)?.telefone }}
 
         </div>
+
+      </div>
 
       }
 
@@ -96,9 +89,7 @@
           Veículo
         </label>
 
-        <select
-          class="form-select"
-          [(ngModel)]="novaOrdem.veiculo_id">
+        <select class="form-select" [(ngModel)]="novaOrdem.veiculo_id">
 
           <option [ngValue]="0">
             Selecione um veículo
@@ -106,11 +97,11 @@
 
           @for (veiculo of veiculosCliente; track veiculo.id) {
 
-            <option [ngValue]="veiculo.id">
+          <option [ngValue]="veiculo.id">
 
-              {{ veiculo.modelo }} - {{ veiculo.placa }}
+            {{ veiculo.modelo }} - {{ veiculo.placa }}
 
-            </option>
+          </option>
 
           }
 
@@ -127,10 +118,7 @@
 
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novaOrdem.descricao_problema">
+        <input type="text" class="form-control" [(ngModel)]="novaOrdem.descricao_problema">
 
       </div>
 
@@ -143,10 +131,7 @@
 
         </label>
 
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="novaOrdem.valor_total">
+        <input type="number" class="form-control" [(ngModel)]="novaOrdem.valor_total">
 
       </div>
 
@@ -159,9 +144,7 @@
 
         </label>
 
-        <select
-          class="form-select"
-          [(ngModel)]="novaOrdem.status">
+        <select class="form-select" [(ngModel)]="novaOrdem.status">
 
           <option value="Pendente">
             Pendente
@@ -181,50 +164,42 @@
 
       @if(!modoEdicao){
 
-        <button
-          class="btn btn-cadastrar"
-          (click)="salvarOrdemServico()">
+      <button class="btn btn-cadastrar" (click)="salvarOrdemServico()">
 
-          Criar Ordem
+        Criar Ordem
 
-        </button>
+      </button>
 
       } @else {
 
-        <button
-          class="btn btn-warning me-2"
-          (click)="salvarOrdemServico()">
+      <button class="btn btn-warning me-2" (click)="salvarOrdemServico()">
 
-          Salvar Alterações
+        Salvar Alterações
 
-        </button>
+      </button>
 
-        <button
-          class="btn btn-secondary"
-          (click)="cancelarEdicao()">
+      <button class="btn btn-secondary" (click)="cancelarEdicao()">
 
-          Cancelar
+        Cancelar
 
-        </button>
+      </button>
 
       }
-
+      
     </div>
 
   </div>
 
   <!-- BOTÃO LISTA -->
-  <button
-    class="btn btn-outline-dark mb-4"
-    (click)="toggleTabela()">
+  <button class="btn btn-outline-dark mb-4" (click)="toggleTabela()">
 
     @if (!mostrarTabela) {
 
-      Ver Ordens
+    Ver Ordens
 
     } @else {
 
-      Ocultar Ordens
+    Ocultar Ordens
 
     }
 
@@ -233,83 +208,79 @@
   <!-- TABELA -->
   @if (mostrarTabela) {
 
-    <div class="card shadow">
+  <div class="card shadow">
 
-      <div class="card-body">
+    <div class="card-body">
 
-        <h4 class="mb-4">
+      <h4 class="mb-4">
 
-          Lista de Ordens
+        Lista de Ordens
 
-        </h4>
+      </h4>
 
-        <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped">
 
-          <thead class="cabecalho-tabela">
+        <thead class="cabecalho-tabela">
 
-            <tr>
+          <tr>
 
-              <th>ID</th>
-              <th>Cliente</th>
-              <th>Veículo</th>
-              <th>Descrição</th>
-              <th>Status</th>
-              <th>Valor</th>
-              <th width="180">Ações</th>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Veículo</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Valor</th>
+            <th width="180">Ações</th>
 
-            </tr>
+          </tr>
 
-          </thead>
+        </thead>
 
-          <tbody>
+        <tbody>
 
-            @for (ordem of ordensServico; track ordem.id) {
+          @for (ordem of ordensServico; track ordem.id) {
 
-              <tr>
+          <tr>
 
-                <td>{{ ordem.id }}</td>
+            <td>{{ ordem.id }}</td>
 
-                <td>{{ ordem.cliente_nome }}</td>
+            <td>{{ ordem.cliente_nome }}</td>
 
-                <td>{{ ordem.veiculo_modelo }}</td>
+            <td>{{ ordem.veiculo_modelo }}</td>
 
-                <td>{{ ordem.descricao_problema }}</td>
+            <td>{{ ordem.descricao_problema }}</td>
 
-                <td>{{ ordem.status }}</td>
+            <td>{{ ordem.status }}</td>
 
-                <td>R$ {{ ordem.valor_total }}</td>
+            <td>R$ {{ ordem.valor_total }}</td>
 
-                <td>
+            <td>
 
-                  <button
-                    class="btn btn-warning btn-sm me-2"
-                    (click)="editarOrdem(ordem)">
+              <button class="btn btn-warning btn-sm me-2" (click)="editarOrdem(ordem)">
 
-                    Editar
+                Editar
 
-                  </button>
+              </button>
 
-                  <button
-                    class="btn btn-danger btn-sm"
-                    (click)="excluirOrdem(ordem.id!)">
+              <button class="btn btn-danger btn-sm" (click)="excluirOrdem(ordem.id!)">
 
-                    Excluir
+                Excluir
 
-                  </button>
+              </button>
 
-                </td>
+            </td>
 
-              </tr>
+          </tr>
 
-            }
+          }
 
-          </tbody>
+        </tbody>
 
-        </table>
-
-      </div>
+      </table>
 
     </div>
+
+  </div>
 
   }
 

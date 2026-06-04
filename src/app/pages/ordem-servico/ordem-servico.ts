@@ -45,7 +45,7 @@ export class OrdemServicoComponent implements OnInit {
     private ordemServicoService: OrdemServicoService,
     private clienteService: ClienteService,
     private veiculoService: VeiculoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.carregarOrdensServico();
@@ -57,12 +57,15 @@ export class OrdemServicoComponent implements OnInit {
   }
 
   carregarClientes(): void {
+
     this.clienteService
       .listarClientes()
       .subscribe({
+
         next: (dados) => {
           this.clientes = dados;
         },
+
         error: (erro) => {
           console.log(erro);
         }
@@ -83,9 +86,11 @@ export class OrdemServicoComponent implements OnInit {
     this.veiculoService
       .listarPorCliente(this.clienteSelecionado)
       .subscribe({
+
         next: (dados) => {
           this.veiculosCliente = dados;
         },
+
         error: (erro) => {
           console.log(erro);
         }
@@ -97,53 +102,27 @@ export class OrdemServicoComponent implements OnInit {
     this.ordemServicoService
       .listarOrdensServico()
       .subscribe({
+
         next: (dados) => {
           this.ordensServico = dados;
         },
+
         error: (erro) => {
           console.log(erro);
         }
       });
   }
 
-  salvarOrdemServico(): void {
+  cadastrarOrdemServico(): void {
 
-    if (
-      this.modoEdicao &&
-      this.ordemEditandoId !== null
-    ) {
+    if (!this.novaOrdem.veiculo_id) {
 
-      this.ordemServicoService
-        .atualizarOrdemServico(
-          this.ordemEditandoId,
-          this.novaOrdem
-        )
-        .subscribe({
-
-          next: () => {
-
-            Swal.fire({
-              icon: 'success',
-              title: 'Sucesso',
-              text: 'Ordem atualizada com sucesso!',
-              confirmButtonColor: '#3b82f6'
-            });
-
-            this.carregarOrdensServico();
-
-            this.limparFormulario();
-          },
-
-          error: (erro) => {
-
-            Swal.fire({
-              icon: 'error',
-              title: 'Erro',
-              text: erro.error?.detail || 'Erro ao atualizar ordem.',
-              confirmButtonColor: '#1e3a8a'
-            });
-          }
-        });
+      Swal.fire({
+        icon: 'warning',
+        title: 'Veículo obrigatório',
+        text: 'Selecione um veículo.',
+        confirmButtonColor: '#1e3a8a'
+      });
 
       return;
     }
@@ -182,9 +161,13 @@ export class OrdemServicoComponent implements OnInit {
 
   editarOrdem(ordem: OrdemServico): void {
 
+    if (!ordem.id) {
+      return;
+    }
+
     this.modoEdicao = true;
 
-    this.ordemEditandoId = ordem.id!;
+    this.ordemEditandoId = ordem.id;
 
     const cliente = this.clientes.find(
       c => c.nome === ordem.cliente_nome
@@ -198,7 +181,6 @@ export class OrdemServicoComponent implements OnInit {
     }
 
     this.novaOrdem = {
-      id: ordem.id,
       descricao_problema: ordem.descricao_problema,
       status: ordem.status,
       valor_total: ordem.valor_total,
@@ -209,6 +191,47 @@ export class OrdemServicoComponent implements OnInit {
       top: 0,
       behavior: 'smooth'
     });
+  }
+
+  atualizarOrdemServico(): void {
+
+    if (this.ordemEditandoId === null) {
+      return;
+    }
+
+    this.ordemServicoService
+      .atualizarOrdemServico(
+        this.ordemEditandoId,
+        this.novaOrdem
+      )
+      .subscribe({
+
+        next: () => {
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Atualizado',
+            text: 'Ordem atualizada com sucesso!',
+            confirmButtonColor: '#3b82f6'
+          });
+
+          this.carregarOrdensServico();
+
+          this.limparFormulario();
+        },
+
+        error: (erro) => {
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text:
+              erro.error?.detail ||
+              'Erro ao atualizar ordem.',
+            confirmButtonColor: '#1e3a8a'
+          });
+        }
+      });
   }
 
   excluirOrdem(id: number): void {
@@ -244,8 +267,8 @@ export class OrdemServicoComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Excluído',
-              confirmButtonColor: '#1e3a8a',
-              text: 'Ordem removida com sucesso.'
+              text: 'Ordem removida com sucesso.',
+              confirmButtonColor: '#1e3a8a'
             });
 
             this.carregarOrdensServico();
@@ -256,8 +279,8 @@ export class OrdemServicoComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Erro',
-              confirmButtonColor: '#1e3a8a',
-              text: 'Não foi possível excluir.'
+              text: 'Não foi possível excluir.',
+              confirmButtonColor: '#1e3a8a'
             });
           }
         });
@@ -265,7 +288,13 @@ export class OrdemServicoComponent implements OnInit {
   }
 
   cancelarEdicao(): void {
+
     this.limparFormulario();
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   limparFormulario(): void {
