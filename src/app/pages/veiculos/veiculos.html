@@ -100,10 +100,15 @@
       <div class="mb-3">
 
         <label class="form-label">
-          Placa
+          Placa (Ex: ABC1D23)
         </label>
 
-        <input type="text" class="form-control" [(ngModel)]="novoVeiculo.placa">
+        <input type="text" class="form-control" [(ngModel)]="novoVeiculo.placa" maxlength="7" placeholder="ABC1D23"
+          style="text-transform: uppercase;">
+
+        <small class="text-muted">
+          Formato Mercosul: ABC1D23
+        </small>
 
       </div>
 
