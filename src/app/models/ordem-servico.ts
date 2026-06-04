@@ -1,6 +1,6 @@
 export interface OrdemServico {
   id?: number;
-
+  
   descricao_problema: string;
 
   status: string;
@@ -14,4 +14,6 @@ export interface OrdemServico {
   cliente_nome?: string;
 
   data_abertura?: string;
+
+  data_atualizacao?: string;
 }

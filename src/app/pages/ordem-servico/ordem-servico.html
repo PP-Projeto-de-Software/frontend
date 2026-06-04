@@ -7,15 +7,10 @@
 
   <!-- FORMULÁRIO -->
   <div class="card shadow mb-4">
-
     <div class="card-body">
 
       <h4 class="mb-4">
-        @if(!modoEdicao){
-          Criar Ordem de Serviço
-        } @else {
-          Editar Ordem de Serviço
-        }
+        @if(!modoEdicao){ Criar Ordem de Serviço } @else { Editar Ordem de Serviço }
       </h4>
 
       <!-- CLIENTE -->
@@ -78,15 +73,24 @@
       <!-- DATA DE ABERTURA -->
       <div class="mb-4">
         <label class="form-label">Data de Abertura</label>
-        <input
-          type="datetime-local"
-          class="form-control"
-          [(ngModel)]="novaOrdem.data_abertura"
-        >
+        <input type="datetime-local" class="form-control" [(ngModel)]="novaOrdem.data_abertura">
         <div class="form-text text-muted">
-          Se não informada, será preenchida automaticamente com a data/hora atual.
+          Se não informada, será preenchida automaticamente.
         </div>
       </div>
+
+      <!-- DATA ATUALIZAÇÃO (somente leitura no modo edição) -->
+      @if(modoEdicao && novaOrdem.data_atualizacao){
+        <div class="mb-4">
+          <label class="form-label">Última Atualização</label>
+          <input
+            type="text"
+            class="form-control"
+            [value]="novaOrdem.data_atualizacao | date: 'dd/MM/yyyy HH:mm'"
+            disabled
+          >
+        </div>
+      }
 
       @if(!modoEdicao){
         <button class="btn btn-cadastrar" (click)="cadastrarOrdemServico()">
@@ -109,15 +113,24 @@
     @if (!mostrarTabela) { Ver Ordens } @else { Ocultar Ordens }
   </button>
 
+  <!-- LOADING -->
+  @if (carregando) {
+    <div class="text-center my-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p class="mt-2 text-muted">Carregando ordens...</p>
+    </div>
+  }
+
   <!-- TABELA -->
-  @if (mostrarTabela) {
+  @if (mostrarTabela && !carregando) {
     <div class="card shadow">
       <div class="card-body">
 
         <h4 class="mb-4">Lista de Ordens</h4>
 
         <table class="table table-bordered table-striped">
-
           <thead class="cabecalho-tabela">
             <tr>
               <th>ID</th>
@@ -127,10 +140,10 @@
               <th>Status</th>
               <th>Valor</th>
               <th>Data Abertura</th>
+              <th>Última Atualização</th>
               <th width="180">Ações</th>
             </tr>
           </thead>
-
           <tbody>
             @for (ordem of ordensServico; track ordem.id) {
               <tr>
@@ -141,6 +154,7 @@
                 <td>{{ ordem.status }}</td>
                 <td>R$ {{ ordem.valor_total }}</td>
                 <td>{{ ordem.data_abertura | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ ordem.data_atualizacao | date: 'dd/MM/yyyy HH:mm' }}</td>
                 <td>
                   <button class="btn btn-warning btn-sm me-2" (click)="editarOrdem(ordem)">
                     Editar
@@ -152,8 +166,8 @@
               </tr>
             }
           </tbody>
-
         </table>
+
       </div>
     </div>
   }
