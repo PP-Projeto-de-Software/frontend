@@ -2,11 +2,7 @@
 
   <h1 class="titulo-pagina mb-4">
 
-    <img
-      src="veiculos.png"
-      alt="Veículos"
-      class="icone-titulo"
-    >
+    <img src="veiculos.png" alt="Veículos" class="icone-titulo">
 
     Veículos
 
@@ -28,25 +24,55 @@
           Cliente
         </label>
 
-        <select
-          class="form-select"
-          [(ngModel)]="novoVeiculo.cliente_id">
+        <select class="form-select" [(ngModel)]="novoVeiculo.cliente_id">
 
           <option [ngValue]="0">
             Selecione um cliente
           </option>
 
-          @for (cliente of clientes; track cliente.id) {
+          @for(cliente of clientes; track cliente.id){
 
-            <option [ngValue]="cliente.id">
-              {{ cliente.nome }}
-            </option>
+          <option [ngValue]="cliente.id">
+            {{ cliente.nome }}
+          </option>
 
           }
 
         </select>
 
       </div>
+
+      @if(novoVeiculo.cliente_id){
+
+      <div class="card bg-light border mb-3">
+
+        <div class="card-body">
+
+          <h6 class="mb-2">
+
+            Dados do Cliente
+
+          </h6>
+
+          <strong>Nome:</strong>
+
+          {{
+          clientes.find(c => c.id === novoVeiculo.cliente_id)?.nome
+          }}
+
+          <br>
+
+          <strong>Telefone:</strong>
+
+          {{
+          clientes.find(c => c.id === novoVeiculo.cliente_id)?.telefone
+          }}
+
+        </div>
+
+      </div>
+
+      }
 
       <!-- MARCA -->
       <div class="mb-3">
@@ -55,11 +81,7 @@
           Marca
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novoVeiculo.marca"
-        >
+        <input type="text" class="form-control" [(ngModel)]="novoVeiculo.marca">
 
       </div>
 
@@ -70,11 +92,7 @@
           Modelo
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novoVeiculo.modelo"
-        >
+        <input type="text" class="form-control" [(ngModel)]="novoVeiculo.modelo">
 
       </div>
 
@@ -85,11 +103,7 @@
           Placa
         </label>
 
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="novoVeiculo.placa"
-        >
+        <input type="text" class="form-control" [(ngModel)]="novoVeiculo.placa">
 
       </div>
 
@@ -100,17 +114,11 @@
           Ano
         </label>
 
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="novoVeiculo.ano"
-        >
+        <input type="number" class="form-control" [(ngModel)]="novoVeiculo.ano">
 
       </div>
 
-      <button
-        class="btn btn-dark"
-        (click)="cadastrarVeiculo()">
+      <button class="btn btn-dark" (click)="cadastrarVeiculo()">
 
         Cadastrar Veículo
 
@@ -121,17 +129,15 @@
   </div>
 
   <!-- BOTÃO LISTA -->
-  <button
-    class="btn btn-outline-dark mb-4"
-    (click)="toggleTabela()">
+  <button class="btn btn-outline-dark mb-4" (click)="toggleTabela()">
 
     @if (!mostrarTabela) {
 
-      Ver Veículos
+    Ver Veículos
 
     } @else {
 
-      Ocultar Veículos
+    Ocultar Veículos
 
     }
 
@@ -169,16 +175,16 @@
 
           @for (veiculo of veiculos; track veiculo.id) {
 
-            <tr>
+          <tr>
 
-              <td>{{ veiculo.id }}</td>
-              <td>{{ veiculo.cliente_nome }}</td>
-              <td>{{ veiculo.marca }}</td>
-              <td>{{ veiculo.modelo }}</td>
-              <td>{{ veiculo.placa }}</td>
-              <td>{{ veiculo.ano }}</td>
+            <td>{{ veiculo.id }}</td>
+            <td>{{ veiculo.cliente_nome }}</td>
+            <td>{{ veiculo.marca }}</td>
+            <td>{{ veiculo.modelo }}</td>
+            <td>{{ veiculo.placa }}</td>
+            <td>{{ veiculo.ano }}</td>
 
-            </tr>
+          </tr>
 
           }
 
