@@ -40,7 +40,7 @@ export class ClientesComponent implements OnInit {
 
   constructor(
     private clienteService: ClienteService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -72,7 +72,10 @@ export class ClientesComponent implements OnInit {
 
   cadastrarCliente(): void {
 
-    if (this.modoEdicao && this.clienteEditandoId) {
+    if (
+      this.modoEdicao &&
+      this.clienteEditandoId !== null
+    ) {
 
       this.clienteService
         .atualizarCliente(
@@ -164,21 +167,22 @@ export class ClientesComponent implements OnInit {
 
   editarCliente(cliente: Cliente): void {
 
+    if (cliente.id == null) {
+      return;
+    }
+
     this.modoEdicao = true;
 
-    this.clienteEditandoId = cliente.id!;
+    this.clienteEditandoId = cliente.id;
 
     this.novoCliente = {
-
       nome: cliente.nome,
       telefone: cliente.telefone,
       email: cliente.email
     };
 
     window.scrollTo({
-
       top: 0,
-
       behavior: 'smooth'
     });
   }
@@ -190,11 +194,15 @@ export class ClientesComponent implements OnInit {
     this.clienteEditandoId = null;
 
     this.novoCliente = {
-
       nome: '',
       telefone: '',
       email: ''
     };
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   excluirCliente(id: number): void {

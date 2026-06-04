@@ -257,6 +257,8 @@ export class VeiculosComponent implements OnInit {
 
       confirmButtonText: 'Sim',
 
+      confirmButtonColor: '#3b82f6',
+
       cancelButtonText: 'Cancelar'
     })
     .then((resultado) => {

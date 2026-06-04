@@ -45,7 +45,7 @@ export class OrdemServicoComponent implements OnInit {
     private ordemServicoService: OrdemServicoService,
     private clienteService: ClienteService,
     private veiculoService: VeiculoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.carregarOrdensServico();
@@ -108,7 +108,10 @@ export class OrdemServicoComponent implements OnInit {
 
   salvarOrdemServico(): void {
 
-    if (this.modoEdicao && this.ordemEditandoId) {
+    if (
+      this.modoEdicao &&
+      this.ordemEditandoId !== null
+    ) {
 
       this.ordemServicoService
         .atualizarOrdemServico(
@@ -183,12 +186,29 @@ export class OrdemServicoComponent implements OnInit {
 
     this.ordemEditandoId = ordem.id!;
 
+    const cliente = this.clientes.find(
+      c => c.nome === ordem.cliente_nome
+    );
+
+    if (cliente) {
+
+      this.clienteSelecionado = cliente.id!;
+
+      this.onClienteChange();
+    }
+
     this.novaOrdem = {
+      id: ordem.id,
       descricao_problema: ordem.descricao_problema,
       status: ordem.status,
       valor_total: ordem.valor_total,
       veiculo_id: ordem.veiculo_id
     };
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   excluirOrdem(id: number): void {
@@ -204,6 +224,8 @@ export class OrdemServicoComponent implements OnInit {
       showCancelButton: true,
 
       confirmButtonText: 'Sim',
+      
+      confirmButtonColor: '#3b82f6',
 
       cancelButtonText: 'Cancelar'
 
