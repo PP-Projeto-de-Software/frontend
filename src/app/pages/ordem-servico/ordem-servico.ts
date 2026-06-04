@@ -10,11 +10,12 @@ import { VeiculoService } from '../../services/veiculo.service';
 import { OrdemServico } from '../../models/ordem-servico';
 import { Cliente } from '../../models/cliente';
 import { Veiculo } from '../../models/veiculo';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-ordem-servico',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   templateUrl: './ordem-servico.html',
   styleUrl: './ordem-servico.css',
 })
