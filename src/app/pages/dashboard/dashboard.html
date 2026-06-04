@@ -1,113 +1,126 @@
 <div class="container mt-5">
 
-  <h1 class="titulo-dashboard mb-4">
+  <h1 class="titulo-dashboard mb-4">Dashboard</h1>
 
-    Dashboard
+  <!-- FILTROS -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
 
-  </h1>
+      <h6 class="mb-3">Filtros</h6>
 
-  <div class="row">
+      <div class="row g-3 align-items-end">
 
-    <div class="col-md-3 mb-3">
+        <div class="col-md-3">
+          <label class="form-label">Data Início</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="dataInicio"
+          >
+        </div>
 
-      <div class="card shadow">
+        <div class="col-md-3">
+          <label class="form-label">Data Fim</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="dataFim"
+          >
+        </div>
 
-        <div class="card-body text-center">
+        <div class="col-md-3">
+          <label class="form-label">Status</label>
+          <select class="form-select" [(ngModel)]="statusFiltro">
+            <option value="">Todos</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Em Andamento">Em Andamento</option>
+            <option value="Concluído">Concluído</option>
+          </select>
+        </div>
 
-          <h5>Total de Ordens</h5>
-
-          <h2>
-
-            {{ dashboard.total_ordens }}
-
-          </h2>
-
+        <div class="col-md-3 d-flex gap-2">
+          <button class="btn btn-primary w-100" (click)="carregarDashboard()">
+            Filtrar
+          </button>
+          <button class="btn btn-outline-secondary w-100" (click)="limparFiltros()">
+            Limpar
+          </button>
         </div>
 
       </div>
-
     </div>
-
-    <div class="col-md-3 mb-3">
-
-      <div class="card shadow">
-
-        <div class="card-body text-center">
-
-          <h5>Pendentes</h5>
-
-          <h2>
-
-            {{ dashboard.pendentes }}
-
-          </h2>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="col-md-3 mb-3">
-
-      <div class="card shadow">
-
-        <div class="card-body text-center">
-
-          <h5>Em Andamento</h5>
-
-          <h2>
-
-            {{ dashboard.em_andamento }}
-
-          </h2>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="col-md-3 mb-3">
-
-      <div class="card shadow">
-
-        <div class="card-body text-center">
-
-          <h5>Concluídas</h5>
-
-          <h2>
-
-            {{ dashboard.concluidas }}
-
-          </h2>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </div>
 
-  <div class="card shadow mt-4">
+  <!-- LOADING -->
+  @if (carregando) {
+    <div class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p class="mt-2 text-muted">Carregando dashboard...</p>
+    </div>
+  }
 
-    <div class="card-body text-center">
+  <!-- ERRO -->
+  @if (erro && !carregando) {
+    <div class="alert alert-danger text-center">
+      Não foi possível carregar o dashboard.
+      <button class="btn btn-sm btn-outline-danger ms-3" (click)="carregarDashboard()">
+        Tentar novamente
+      </button>
+    </div>
+  }
 
-      <h4>
+  <!-- CONTEÚDO -->
+  @if (dashboard && !carregando && !erro) {
 
-        Faturamento Total
+    <div class="row">
 
-      </h4>
+      <div class="col-md-3 mb-3">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Total de Ordens</h5>
+            <h2>{{ dashboard.total_ordens }}</h2>
+          </div>
+        </div>
+      </div>
 
-      <h1>
+      <div class="col-md-3 mb-3">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Pendentes</h5>
+            <h2>{{ dashboard.pendentes }}</h2>
+          </div>
+        </div>
+      </div>
 
-        R$ {{ dashboard.faturamento_total }}
+      <div class="col-md-3 mb-3">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Em Andamento</h5>
+            <h2>{{ dashboard.em_andamento }}</h2>
+          </div>
+        </div>
+      </div>
 
-      </h1>
+      <div class="col-md-3 mb-3">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Concluídas</h5>
+            <h2>{{ dashboard.concluidas }}</h2>
+          </div>
+        </div>
+      </div>
 
     </div>
 
-  </div>
+    <div class="card shadow mt-2">
+      <div class="card-body text-center">
+        <h4>Faturamento Total</h4>
+        <h1>R$ {{ dashboard.faturamento_total | number: '1.2-2' }}</h1>
+      </div>
+    </div>
+
+  }
 
 </div>

@@ -39,7 +39,7 @@ export class OrdemServicoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.carregarClientes(); // só carrega clientes na inicialização
+    this.carregarClientes();
   }
 
   private ordemVazia(): OrdemServico {
@@ -47,15 +47,9 @@ export class OrdemServicoComponent implements OnInit {
       descricao_problema: '',
       status: 'Pendente',
       valor_total: 0,
-      veiculo_id: 0,
-      data_abertura: '',
-      data_atualizacao: ''
+      veiculo_id: 0
+      // data_abertura e data_atualizacao omitidas — preenchidas pelo backend
     };
-  }
-
-  private formatarDataParaApi(data: string | undefined): string | undefined {
-    if (!data) return undefined;
-    return new Date(data).toISOString();
   }
 
   private formatarDataParaInput(data: string | undefined): string {
@@ -67,8 +61,6 @@ export class OrdemServicoComponent implements OnInit {
 
   toggleTabela(): void {
     this.mostrarTabela = !this.mostrarTabela;
-
-    // só carrega quando abre a tabela
     if (this.mostrarTabela) {
       this.carregarOrdensServico();
     }
@@ -118,9 +110,11 @@ export class OrdemServicoComponent implements OnInit {
       return;
     }
 
-    const payload: OrdemServico = {
-      ...this.novaOrdem,
-      data_abertura: this.formatarDataParaApi(this.novaOrdem.data_abertura)
+    const payload = {
+      descricao_problema: this.novaOrdem.descricao_problema,
+      status: this.novaOrdem.status,
+      valor_total: this.novaOrdem.valor_total,
+      veiculo_id: this.novaOrdem.veiculo_id
     };
 
     this.ordemServicoService.criarOrdemServico(payload).subscribe({
@@ -131,7 +125,6 @@ export class OrdemServicoComponent implements OnInit {
           text: 'Ordem cadastrada com sucesso!',
           confirmButtonColor: '#3b82f6'
         });
-        // recarrega a tabela se estiver aberta
         if (this.mostrarTabela) {
           this.carregarOrdensServico();
         }
@@ -165,7 +158,6 @@ export class OrdemServicoComponent implements OnInit {
       status: ordem.status,
       valor_total: ordem.valor_total,
       veiculo_id: ordem.veiculo_id,
-      data_abertura: this.formatarDataParaInput(ordem.data_abertura),
       data_atualizacao: ordem.data_atualizacao
     };
 
@@ -175,9 +167,11 @@ export class OrdemServicoComponent implements OnInit {
   atualizarOrdemServico(): void {
     if (this.ordemEditandoId === null) return;
 
-    const payload: OrdemServico = {
-      ...this.novaOrdem,
-      data_abertura: this.formatarDataParaApi(this.novaOrdem.data_abertura)
+    const payload = {
+      descricao_problema: this.novaOrdem.descricao_problema,
+      status: this.novaOrdem.status,
+      valor_total: this.novaOrdem.valor_total,
+      veiculo_id: this.novaOrdem.veiculo_id
     };
 
     this.ordemServicoService

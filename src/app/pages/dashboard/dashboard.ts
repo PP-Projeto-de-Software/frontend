@@ -1,43 +1,64 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { OrdemServicoService }
-from '../../services/ordem-servico.service';
+import { OrdemServicoService } from '../../services/ordem-servico.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
-export class DashboardComponent
-implements OnInit {
+export class DashboardComponent implements OnInit {
 
-  dashboard: any = {};
+  dashboard: any = null;
+  carregando = false;
+  erro = false;
 
-  constructor(
-    private ordemService: OrdemServicoService
-  ) {}
+  // filtros
+  dataInicio = '';
+  dataFim = '';
+  statusFiltro = '';
+
+  constructor(private ordemService: OrdemServicoService) {}
 
   ngOnInit(): void {
-
     this.carregarDashboard();
   }
 
   carregarDashboard(): void {
+    this.carregando = true;
+    this.erro = false;
 
-    this.ordemService
-      .obterDashboard()
-      .subscribe({
+    const inicio = this.dataInicio
+      ? new Date(this.dataInicio).toISOString()
+      : undefined;
 
-        next: (dados) => {
+    const fim = this.dataFim
+      ? new Date(this.dataFim).toISOString()
+      : undefined;
 
-          this.dashboard = dados;
-        },
+    const statusVal = this.statusFiltro || undefined;
 
-        error: (erro) => {
+    this.ordemService.obterDashboard(inicio, fim, statusVal).subscribe({
+      next: (dados) => {
+        this.dashboard = dados;
+        this.carregando = false;
+      },
+      error: (erro) => {
+        console.error(erro);
+        this.carregando = false;
+        this.erro = true;
+      }
+    });
+  }
 
-          console.log(erro);
-        }
-      });
+  limparFiltros(): void {
+    this.dataInicio = '';
+    this.dataFim = '';
+    this.statusFiltro = '';
+    this.carregarDashboard();
   }
 }

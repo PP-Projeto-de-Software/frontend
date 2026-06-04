@@ -61,22 +61,13 @@
       </div>
 
       <!-- STATUS -->
-      <div class="mb-3">
+      <div class="mb-4">
         <label class="form-label">Status</label>
         <select class="form-select" [(ngModel)]="novaOrdem.status">
           <option value="Pendente">Pendente</option>
           <option value="Em Andamento">Em Andamento</option>
           <option value="Concluído">Concluído</option>
         </select>
-      </div>
-
-      <!-- DATA DE ABERTURA -->
-      <div class="mb-4">
-        <label class="form-label">Data de Abertura</label>
-        <input type="datetime-local" class="form-control" [(ngModel)]="novaOrdem.data_abertura">
-        <div class="form-text text-muted">
-          Se não informada, será preenchida automaticamente.
-        </div>
       </div>
 
       <!-- DATA ATUALIZAÇÃO (somente leitura no modo edição) -->
@@ -113,7 +104,7 @@
     @if (!mostrarTabela) { Ver Ordens } @else { Ocultar Ordens }
   </button>
 
-  <!-- SPINNER + TABELA — só aparecem após clicar em "Ver Ordens" -->
+  <!-- SPINNER + TABELA -->
   @if (mostrarTabela) {
 
     @if (carregando) {
