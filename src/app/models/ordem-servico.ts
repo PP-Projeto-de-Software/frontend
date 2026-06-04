@@ -1,5 +1,4 @@
 export interface OrdemServico {
-
   id?: number;
 
   descricao_problema: string;
@@ -10,7 +9,9 @@ export interface OrdemServico {
 
   veiculo_id: number;
 
+  veiculo_modelo?: string;
+
   cliente_nome?: string;
 
-  veiculo_modelo?: string;
+  data_abertura?: string;
 }
