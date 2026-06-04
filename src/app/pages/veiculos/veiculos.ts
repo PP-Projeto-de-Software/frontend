@@ -127,6 +127,7 @@ export class VeiculosComponent implements OnInit {
       Swal.fire({
         icon: 'warning',
         title: 'Cliente obrigatório',
+        confirmButtonColor: '#1e3a8a',
         text: 'Selecione um cliente.'
       });
 
@@ -165,6 +166,7 @@ export class VeiculosComponent implements OnInit {
             Swal.fire({
               icon: 'warning',
               title: 'Placa já cadastrada',
+              confirmButtonColor: '#1e3a8a',
               text: erro.error.detail
             });
 
@@ -176,6 +178,8 @@ export class VeiculosComponent implements OnInit {
             icon: 'error',
 
             title: 'Erro',
+
+            confirmButtonColor: '#1e3a8a',
 
             text: erro.error?.detail || 'Erro ao cadastrar veículo.'
           });
@@ -221,6 +225,8 @@ export class VeiculosComponent implements OnInit {
 
             title: 'Atualizado',
 
+            confirmButtonColor: '#3b82f6',
+
             text: 'Veículo atualizado com sucesso!'
           });
 
@@ -236,6 +242,8 @@ export class VeiculosComponent implements OnInit {
             icon: 'error',
 
             title: 'Erro',
+
+            confirmButtonColor: '#1e3a8a',
 
             text: erro.error?.detail || 'Erro ao atualizar.'
           });
@@ -279,6 +287,8 @@ export class VeiculosComponent implements OnInit {
 
               title: 'Excluído',
 
+              confirmButtonColor: '#1e3a8a',
+
               text: 'Veículo removido com sucesso.'
             });
 
@@ -292,6 +302,8 @@ export class VeiculosComponent implements OnInit {
               icon: 'error',
 
               title: 'Erro',
+
+              confirmButtonColor: '#1e3a8a',
 
               text: 'Não foi possível excluir.'
             });

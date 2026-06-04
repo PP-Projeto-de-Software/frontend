@@ -110,6 +110,8 @@ export class ClientesComponent implements OnInit {
 
               title: 'Erro',
 
+              confirmButtonColor: '#1e3a8a',
+
               text:
                 erro.error?.detail ||
                 'Erro ao atualizar cliente.'
@@ -241,6 +243,8 @@ export class ClientesComponent implements OnInit {
 
               title: 'Excluído',
 
+              confirmButtonColor: '#1e3a8a',
+
               text: 'Cliente removido com sucesso!'
             });
 
@@ -254,6 +258,8 @@ export class ClientesComponent implements OnInit {
               icon: 'error',
 
               title: 'Erro',
+
+              confirmButtonColor: '#1e3a8a',
 
               text: 'Não foi possível excluir.'
             });

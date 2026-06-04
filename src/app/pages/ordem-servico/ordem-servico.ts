@@ -224,7 +224,7 @@ export class OrdemServicoComponent implements OnInit {
       showCancelButton: true,
 
       confirmButtonText: 'Sim',
-      
+
       confirmButtonColor: '#3b82f6',
 
       cancelButtonText: 'Cancelar'
@@ -244,6 +244,7 @@ export class OrdemServicoComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Excluído',
+              confirmButtonColor: '#1e3a8a',
               text: 'Ordem removida com sucesso.'
             });
 
@@ -255,6 +256,7 @@ export class OrdemServicoComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Erro',
+              confirmButtonColor: '#1e3a8a',
               text: 'Não foi possível excluir.'
             });
           }
