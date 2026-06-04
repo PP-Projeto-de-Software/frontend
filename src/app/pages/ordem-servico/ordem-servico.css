@@ -37,7 +37,8 @@ h1::after, .container h1::after {
 }
 
 
-.mb-3:focus-within .form-label {
+.mb-3:focus-within > .form-label,
+.mb-4:focus-within > .form-label {
   color: #1e3a8a !important; 
   transform: translateY(-3px) scale(1.05); 
 }
@@ -52,7 +53,7 @@ h1::after, .container h1::after {
 table.table {
   border-collapse: separate !important;
   border-spacing: 0;
-  border: 2px solid #0f172a !important; 
+  border: 2px solid #e5e7eb !important; 
   border-radius: 12px !important;       
   overflow: hidden;
   
@@ -62,10 +63,10 @@ table.table {
 
 
 table thead tr th {
-  background-color: #1e3a8a !important; 
+  background-color: #0195eb !important; 
   color: #ffffff !important;            
-  border-bottom: 2px solid #0f172a !important; 
-  border-right: 1px solid #0f172a !important;  
+  border-bottom: 2px solid #0185d1 !important; 
+  border-right: 1px solid #0185d1 !important;  
   padding: 12px;
   text-align: center;
   font-weight: 600;
@@ -79,7 +80,7 @@ table thead tr th:last-child {
 
 
 table thead tr th:hover {
-  background-color: #3b82f6 !important; 
+  background-color: #017fca !important; 
   cursor: pointer;
 }
 
@@ -107,4 +108,27 @@ table tbody tr td {
     width: 45px;
     height: 45px;
     object-fit: contain;
+}
+
+.btn-cadastrar {
+    background-color: #0195eb;
+    border-color: #0195eb;
+    color: white;
+    font-weight: 500;
+}
+
+.btn-cadastrar:hover {
+    background-color: #017fca;
+    border-color: #017fca;
+    color: white;
+}
+
+.cabecalho-tabela th {
+    background-color: #0195eb;
+    color: white;
+    border-color: #0195eb;
+}
+
+.cabecalho-tabela th:hover {
+    background-color: #017fca;
 }
