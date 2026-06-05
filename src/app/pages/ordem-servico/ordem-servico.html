@@ -14,9 +14,10 @@
       </h4>
 
       <!-- CLIENTE -->
+      <form #osForm="ngForm" (ngSubmit)="modoEdicao ? atualizarOrdemServico() : cadastrarOrdemServico()">
       <div class="mb-3">
         <label class="form-label">Cliente</label>
-        <select class="form-select" [(ngModel)]="clienteSelecionado" (change)="onClienteChange()">
+        <select class="form-select" name="cliente" [(ngModel)]="clienteSelecionado" (change)="onClienteChange()" required>
           <option [ngValue]="0">Selecione um cliente</option>
           @for (cliente of clientes; track cliente.id) {
             <option [ngValue]="cliente.id">{{ cliente.nome }}</option>
@@ -40,7 +41,7 @@
       <!-- VEÍCULO -->
       <div class="mb-3">
         <label class="form-label">Veículo</label>
-        <select class="form-select" [(ngModel)]="novaOrdem.veiculo_id">
+        <select class="form-select" name="veiculo_id" [(ngModel)]="novaOrdem.veiculo_id" required>
           <option [ngValue]="0">Selecione um veículo</option>
           @for (veiculo of veiculosCliente; track veiculo.id) {
             <option [ngValue]="veiculo.id">{{ veiculo.modelo }} - {{ veiculo.placa }}</option>
@@ -51,19 +52,19 @@
       <!-- DESCRIÇÃO -->
       <div class="mb-3">
         <label class="form-label">Descrição</label>
-        <input type="text" class="form-control" [(ngModel)]="novaOrdem.descricao_problema">
+        <input type="text" class="form-control" name="descricao_problema" [(ngModel)]="novaOrdem.descricao_problema" required>
       </div>
 
       <!-- VALOR -->
       <div class="mb-3">
         <label class="form-label">Valor</label>
-        <input type="number" class="form-control" [(ngModel)]="novaOrdem.valor_total">
+        <input type="number" class="form-control" name="valor_total" [(ngModel)]="novaOrdem.valor_total" required>
       </div>
 
       <!-- STATUS -->
       <div class="mb-4">
         <label class="form-label">Status</label>
-        <select class="form-select" [(ngModel)]="novaOrdem.status">
+        <select class="form-select" name="status" [(ngModel)]="novaOrdem.status" required>
           <option value="Pendente">Pendente</option>
           <option value="Em Andamento">Em Andamento</option>
           <option value="Concluído">Concluído</option>
@@ -84,17 +85,19 @@
       }
 
       @if(!modoEdicao){
-        <button class="btn btn-cadastrar" (click)="cadastrarOrdemServico()">
+        <button type="submit" class="btn btn-cadastrar" [disabled]="!osForm.valid || !clienteSelecionado || !novaOrdem.veiculo_id">
           Criar Ordem
         </button>
       } @else {
-        <button class="btn btn-warning me-2" (click)="atualizarOrdemServico()">
+        <button type="submit" class="btn btn-warning me-2" [disabled]="!osForm.valid || !clienteSelecionado || !novaOrdem.veiculo_id">
           Salvar Alterações
         </button>
-        <button class="btn btn-secondary" (click)="cancelarEdicao()">
+        <button type="button" class="btn btn-secondary" (click)="cancelarEdicao()">
           Cancelar
         </button>
       }
+
+      </form>
 
     </div>
   </div>

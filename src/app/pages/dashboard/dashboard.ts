@@ -4,6 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { OrdemServicoService } from '../../services/ordem-servico.service';
 
+export interface DashboardData {
+  total_ordens: number;
+  pendentes: number;
+  em_andamento: number;
+  concluidas: number;
+  faturamento_total: number;
+}
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -13,7 +21,7 @@ import { OrdemServicoService } from '../../services/ordem-servico.service';
 })
 export class DashboardComponent implements OnInit {
 
-  dashboard: any = null;
+  dashboard: DashboardData | null = null;
   carregando = false;
   erro = false;
 

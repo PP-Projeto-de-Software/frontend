@@ -32,6 +32,8 @@
 
       </h4>
 
+      <form #clienteForm="ngForm" (ngSubmit)="cadastrarCliente()">
+
       <div class="mb-3">
 
         <label class="form-label">
@@ -43,8 +45,10 @@
         <input
           type="text"
           class="form-control"
+          name="nome"
           [(ngModel)]="novoCliente.nome"
           placeholder="Digite o nome completo do cliente"
+          required
         />
 
       </div>
@@ -60,8 +64,10 @@
         <input
           type="text"
           class="form-control"
+          name="telefone"
           [(ngModel)]="novoCliente.telefone"
           placeholder="(11) 99999-9999"
+          required
         />
 
       </div>
@@ -77,8 +83,10 @@
         <input
           type="email"
           class="form-control"
+          name="email"
           [(ngModel)]="novoCliente.email"
           placeholder="cliente@email.com"
+          required
         />
 
       </div>
@@ -86,8 +94,9 @@
       @if(!modoEdicao){
 
       <button
+        type="submit"
         class="btn btn-cadastrar"
-        (click)="cadastrarCliente()"
+        [disabled]="!clienteForm.valid"
       >
 
         Cadastrar Cliente
@@ -97,14 +106,16 @@
       } @else {
 
         <button
+          type="submit"
           class="btn btn-warning me-2"
-          (click)="cadastrarCliente()">
+          [disabled]="!clienteForm.valid">
 
           Salvar Alterações
 
         </button>
 
         <button
+          type="button"
           class="btn btn-secondary"
           (click)="cancelarEdicao()">
 
@@ -113,6 +124,8 @@
         </button>
 
       }
+
+      </form>
 
     </div>
 

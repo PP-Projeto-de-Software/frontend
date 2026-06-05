@@ -15,7 +15,7 @@ export class OrdemServicoService {
   constructor(private http: HttpClient) {}
 
   listarOrdensServico(): Observable<OrdemServico[]> {
-    return this.http.get<OrdemServico[]>(this.apiUrl);
+    return this.http.get<OrdemServico[]>(`${this.apiUrl}/`);
   }
 
   buscarPorId(id: number): Observable<OrdemServico> {
@@ -23,7 +23,7 @@ export class OrdemServicoService {
   }
 
   criarOrdemServico(ordem: OrdemServico): Observable<OrdemServico> {
-    return this.http.post<OrdemServico>(this.apiUrl, ordem);
+    return this.http.post<OrdemServico>(`${this.apiUrl}/`, ordem);
   }
 
   atualizarOrdemServico(id: number, ordem: OrdemServico): Observable<OrdemServico> {

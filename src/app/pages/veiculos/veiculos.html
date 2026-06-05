@@ -31,6 +31,8 @@
 
       </h4>
 
+      <form #veiculoForm="ngForm" (ngSubmit)="editando ? atualizarVeiculo() : cadastrarVeiculo()">
+
       <!-- CLIENTE -->
       <div class="mb-3">
 
@@ -42,7 +44,9 @@
 
         <select
           class="form-select"
-          [(ngModel)]="novoVeiculo.cliente_id">
+          name="cliente_id"
+          [(ngModel)]="novoVeiculo.cliente_id"
+          required>
 
           <option [ngValue]="0">
 
@@ -113,7 +117,9 @@
         <input
           type="text"
           class="form-control"
+          name="marca"
           [(ngModel)]="novoVeiculo.marca"
+          required
         >
 
       </div>
@@ -130,7 +136,9 @@
         <input
           type="text"
           class="form-control"
+          name="modelo"
           [(ngModel)]="novoVeiculo.modelo"
+          required
         >
 
       </div>
@@ -147,10 +155,12 @@
         <input
           type="text"
           class="form-control"
+          name="placa"
           [(ngModel)]="novoVeiculo.placa"
           maxlength="7"
           placeholder="ABC1D23"
           style="text-transform: uppercase;"
+          required
         >
 
       </div>
@@ -167,7 +177,9 @@
         <input
           type="number"
           class="form-control"
+          name="ano"
           [(ngModel)]="novoVeiculo.ano"
+          required
         >
 
       </div>
@@ -176,8 +188,9 @@
       @if(!editando){
 
       <button
+        type="submit"
         class="btn btn-cadastrar"
-        (click)="cadastrarVeiculo()">
+        [disabled]="!veiculoForm.valid || !novoVeiculo.cliente_id">
 
         Cadastrar Veículo
 
@@ -186,14 +199,16 @@
       } @else {
 
       <button
+        type="submit"
         class="btn btn-warning me-2"
-        (click)="atualizarVeiculo()">
+        [disabled]="!veiculoForm.valid || !novoVeiculo.cliente_id">
 
         Salvar Alterações
 
       </button>
 
       <button
+        type="button"
         class="btn btn-secondary"
         (click)="limparFormulario()">
 
@@ -202,6 +217,8 @@
       </button>
 
       }
+
+      </form>
 
     </div>
 
