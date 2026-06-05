@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'http://localhost:8000',
+  apiUrl: 'backend-souza-car-bmaherbqgygbgud6.centralus-01.azurewebsites.net',
 };
