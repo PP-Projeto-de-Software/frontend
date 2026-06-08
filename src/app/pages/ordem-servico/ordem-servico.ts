@@ -11,6 +11,7 @@ import { VeiculoService } from '../../services/veiculo.service';
 import { OrdemServico } from '../../models/ordem-servico';
 import { Cliente } from '../../models/cliente';
 import { Veiculo } from '../../models/veiculo';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-ordem-servico',
@@ -35,7 +36,8 @@ export class OrdemServicoComponent implements OnInit {
   constructor(
     private ordemServicoService: OrdemServicoService,
     private clienteService: ClienteService,
-    private veiculoService: VeiculoService
+    private veiculoService: VeiculoService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +50,6 @@ export class OrdemServicoComponent implements OnInit {
       status: 'Pendente',
       valor_total: 0,
       veiculo_id: 0
-      // data_abertura e data_atualizacao omitidas — preenchidas pelo backend
     };
   }
 
@@ -91,10 +92,12 @@ export class OrdemServicoComponent implements OnInit {
       next: (dados) => {
         this.ordensServico = dados;
         this.carregando = false;
+        this.cdr.detectChanges();
       },
       error: (erro) => {
-        console.error(erro);
+        console.error('Erro ao carregar ordens:', erro);
         this.carregando = false;
+        this.cdr.detectChanges();
       }
     });
   }

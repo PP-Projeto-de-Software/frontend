@@ -19,13 +19,11 @@ export class VeiculoService {
     private http: HttpClient
   ) {}
 
-  // LISTAR TODOS
   listarVeiculos(): Observable<Veiculo[]> {
 
     return this.http.get<Veiculo[]>(this.apiUrl);
   }
 
-  // BUSCAR POR CLIENTE
   listarPorCliente(
     clienteId: number
   ): Observable<Veiculo[]> {
@@ -35,7 +33,6 @@ export class VeiculoService {
     );
   }
 
-  // CRIAR
   criarVeiculo(
     veiculo: Veiculo
   ): Observable<Veiculo> {
@@ -46,7 +43,6 @@ export class VeiculoService {
     );
   }
 
-  // EDITAR
   atualizarVeiculo(
     id: number,
     veiculo: Veiculo
@@ -58,7 +54,6 @@ export class VeiculoService {
     );
   }
 
-  // EXCLUIR
   deletarVeiculo(
     id: number
   ): Observable<void> {

@@ -2,7 +2,6 @@
 
   <h1 class="titulo-dashboard mb-4">Dashboard</h1>
 
-  <!-- FILTROS -->
   <div class="card shadow mb-4">
     <div class="card-body">
 
@@ -51,7 +50,6 @@
     </div>
   </div>
 
-  <!-- LOADING -->
   @if (carregando) {
     <div class="text-center my-5">
       <div class="spinner-border text-primary" role="status">
@@ -61,7 +59,6 @@
     </div>
   }
 
-  <!-- ERRO -->
   @if (erro && !carregando) {
     <div class="alert alert-danger text-center">
       Não foi possível carregar o dashboard.
@@ -71,7 +68,6 @@
     </div>
   }
 
-  <!-- CONTEÚDO -->
   @if (dashboard && !carregando && !erro) {
 
     <div class="row">

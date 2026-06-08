@@ -12,22 +12,18 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ClienteService {
-  // URL backend FastAPI
   private apiUrl = `${environment.apiUrl}/clientes`;
 
   constructor(private http: HttpClient) { }
 
-  // LISTAR CLIENTES
   listarClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
-  // CRIAR CLIENTES
   criarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.apiUrl, cliente);
   }
 
-  // ATUALIZAR CLIENTE
   atualizarCliente(
     id: number,
     cliente: Cliente
@@ -39,7 +35,6 @@ export class ClienteService {
     );
   }
   
-  // DELETAR CLIENTE
   deletarCliente(
     id: number
   ): Observable<void> {

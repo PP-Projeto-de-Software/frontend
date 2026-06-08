@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { OrdemServicoService } from '../../services/ordem-servico.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 export interface DashboardData {
   total_ordens: number;
@@ -25,12 +26,14 @@ export class DashboardComponent implements OnInit {
   carregando = false;
   erro = false;
 
-  // filtros
   dataInicio = '';
   dataFim = '';
   statusFiltro = '';
 
-  constructor(private ordemService: OrdemServicoService) {}
+  constructor(
+    private ordemService: OrdemServicoService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.carregarDashboard();
@@ -54,11 +57,13 @@ export class DashboardComponent implements OnInit {
       next: (dados) => {
         this.dashboard = dados;
         this.carregando = false;
+        this.cdr.detectChanges();
       },
       error: (erro) => {
-        console.error(erro);
+        console.error('Erro ao carregar dashboard:', erro);
         this.carregando = false;
         this.erro = true;
+        this.cdr.detectChanges();
       }
     });
   }
